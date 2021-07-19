@@ -32,9 +32,7 @@ export const AppRouter = () => {
                         path="/" 
                         component={Board}
                         />
-                        
-                      
-
+            
                         <Route 
                             
                             path="/auth" 

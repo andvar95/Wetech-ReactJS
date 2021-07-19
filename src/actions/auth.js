@@ -36,11 +36,7 @@ export const checkAuth= () =>({
 })
 
 
-export const startCheking = () =>{
-        return async(dispatch)=>{
-            dispatch(checkAuth())
-        }
-}
+
 
 
 const login = (user) =>({
