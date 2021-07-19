@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {SideBarBoard} from "../board/SideBarBoard";
-
+import {Link,NavLink} from 'react-router-dom';
 
 
 export const Navbar = () => {
