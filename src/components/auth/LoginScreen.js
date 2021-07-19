@@ -2,12 +2,12 @@ import React from "react";
 import { useDispatch,useSelector,useState} from "react-redux";
 import { Link } from "react-router-dom";
 import {useForm} from "../../hooks/useForm";
-//import { login} from "../../actions/auth";
+import { startLogin} from "../../actions/auth";
 
 
 export const LoginScreen = () => {
 
-  //const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
 
   //const {loading} = useSelector(state=>state.ui) 
@@ -21,6 +21,7 @@ export const LoginScreen = () => {
 
   const handleLogin = (event) =>{
     event.preventDefault();
+    dispatch(startLogin(email,password))
   
   }
   
