@@ -10,7 +10,10 @@ export const Teams = () => {
   const handleOpenModal = () => {
     setModal(true);
   };
-  const teams = ["maravilla", "avengers"];
+  const handleDelete = (id) => {
+console.log(id);
+  };
+  const teams = [{id:1,name:"maravilla"}, {id:2,name:"avengers"}];
   return (
     <>
       <div className="row">
@@ -37,9 +40,9 @@ export const Teams = () => {
         <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
           {teams.map((team) => (
             <div className="row"
-            key={uuidv4()}>
+            key={team.id}>
               <div className="col-md-8">
-                <li className="link-ligth rounded">{team}</li>
+                <li className="link-ligth rounded">{team.name}</li>
               </div>
               <div className="col-md-4">
               <button
@@ -50,7 +53,7 @@ export const Teams = () => {
           </button>
           <button
             className="btn btn-danger btn-sm"
-            onClick={handleOpenModal}            
+            onClick={()=>handleDelete(team.id)}            
           >
             <i className="fas fa-trash"></i>
           </button>
