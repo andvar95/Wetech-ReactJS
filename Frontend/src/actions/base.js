@@ -12,14 +12,10 @@ export const getAll = (endpoint) =>{
     return async(dispatch,getState) =>{
         const res = await fetchConToken(endpoint,{},'GET')
         const content = await res.json()
-        const field = keys[endpoint];
-        console.log(keys[endpoint])
-       console.log(content[field])
-
         const {items} = getState();
        
-        console.log(items)
-        dispatch({type:types.getAll,payload:content[field],currentState:items[field],field:endpoint})
+        console.log(content)
+        dispatch({type:types.getAll,payload:content.result,currentState:items,field:endpoint})
 
         
     }
@@ -30,8 +26,8 @@ export const create = (endpoint,body)=>{
         const res = await fetchConToken(endpoint,body,'POST');
         const content = await res.json();
 
-        const {items} = getState();
-        dispatch({type:types.create,payload:content,currentState:items,field:endpoint})
+        const {items} = getState(endpoint);
+        dispatch(getAll(endpoint))
     }
 }
 
@@ -41,7 +37,7 @@ export const update = (endpoint,body)=>{
         const content = await res.json();
 
         const {items} = getState();
-        dispatch({type:types.update,payload:content,currentState:items,field:endpoint})
+        dispatch(getAll(endpoint))
     }
 }
 
@@ -51,6 +47,6 @@ export const remove = (endpoint,body)=>{
         const content = await res.json();
 
         const {items} = getState();
-        dispatch({type:types.delete,payload:content,currentState:items,field:endpoint})
+        dispatch(getAll(endpoint))
     }
 }

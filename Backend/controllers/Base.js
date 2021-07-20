@@ -34,12 +34,12 @@ class BaseController {
 
         try {
             if (req.query.name)
-                results = await this.service.list(req.query.name, populateField);
+                result = await this.service.list(req.query.name, populateField);
             else if (req.query.email)
-                results = await this.service.list(req.query.email, populateField);
+                result = await this.service.list(req.query.email, populateField);
             else if (req.query.type)
-                results = await this.service.list(req.query.type, false);
-            else results = await this.service.getAll({}, populateField);
+                result = await this.service.list(req.query.type, false);
+            else result = await this.service.getAll({}, populateField);
 
             return res.status(200).json({ result });
         } catch (error) {

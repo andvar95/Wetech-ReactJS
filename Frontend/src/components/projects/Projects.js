@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import { getAll} from "../../actions/base";
+import { getAll, create} from "../../actions/base";
 
 export const Projects = () => {
 
@@ -11,9 +11,14 @@ export const Projects = () => {
   
     useEffect(()=>{
         dispatch(getAll('project'))
-        dispatch(getAll('users'))
+
+        
+
+  
+     
 
     },[dispatch])
+
     return (
         <>
         {items.project && <div className="wrap-content">
