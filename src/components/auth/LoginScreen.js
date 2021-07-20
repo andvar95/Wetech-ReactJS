@@ -5,13 +5,13 @@ import {useForm} from "../../hooks/useForm";
 import { startLogin} from "../../actions/auth";
 
 
-export const LoginScreen = () => {
+export const LoginScreen = ({history}) => {
 
   const dispatch = useDispatch()
 
 
   //const {loading} = useSelector(state=>state.ui) 
-
+console.log(history);
   const [formValues, handleInputChange ]  = useForm({
     email:'andres@gmail.com',
     password:'123456'
@@ -21,6 +21,7 @@ export const LoginScreen = () => {
 
   const handleLogin = (event) =>{
     event.preventDefault();
+    history.replace('/');
     dispatch(startLogin(email,password))
     
   

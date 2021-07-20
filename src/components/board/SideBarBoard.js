@@ -1,31 +1,28 @@
-import React from 'react'
-import Modal from "react-modal";
-import {Team} from "../team/Team";
+import React from "react";
+import { Link, NavLink } from "react-router-dom";
+import "./slide.css";
+import {Teams} from "../team/Teams";
 import {Sprint} from "../sprint/Sprint";
-
 export const SideBarBoard = () => {
+  console.log("me dibuje de nuevo");
+  return (
+    <>
+      <div className="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark slide">
 
 
-    return (
+        <ul className="list-unstyled ps-0">
+        <li className="mb-1">
+<Teams/>
 
-            <div  id="side" className="sidebar__content">
-                    <ul>
-                        <li>
-                           <Team />
+    
+      </li>
+          </ul>
 
-                        </li>
+    <hr/>
 
-                        <li>
-                           
-                            <Sprint />
-                        </li>
 
-                        <li className="sidebar__option-container">
-                            <div className="sidebar__option-title">Title </div>
-                            <div className="sidebar__option-content">Opciones</div>
 
-                        </li>
-                        </ul>
-        </div>
-    )
-}
+      </div>
+    </>
+  );
+};
