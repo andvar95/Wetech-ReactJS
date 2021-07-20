@@ -6,6 +6,8 @@ import { checkAuth } from '../actions/auth';
 import {Navbar} from "../components/iu/Navbar"
 import {Board} from "../components/board/Board";
 import {PrivateRoute} from "./PrivateRoute";
+import { Projects } from "../components/projects/Projects";
+import { PublicRoute} from "./PublicRoute"; 
 
 export const AppRouter = () => {
 
@@ -32,9 +34,17 @@ export const AppRouter = () => {
                         path="/" 
                         component={Board}
                         />
+
+                    <PrivateRoute
+                        exact
+                        isAuthenticated={!!token}
+                        path="/projects" 
+                        component={Projects}
+                        />
             
-                        <Route 
+                        <PublicRoute 
                             
+                            isAuthenticated={!!token}
                             path="/auth" 
                             component={AuthRouter}
                             />

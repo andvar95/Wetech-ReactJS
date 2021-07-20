@@ -2,11 +2,12 @@ import {fetchSinToken} from "../helpers/fetch";
 import {types} from "../types/types";
 
 export const startLogin = (email,password) =>{
-    return async() =>{
+    return async(dispatch) =>{
         const res = await fetchSinToken('auth/login',{email,password},'POST')
         const body = await res.json()
 
         if(body) localStorage.setItem('token',body.token)
+        dispatch(checkAuth())
 
         console.log(body);
     }
