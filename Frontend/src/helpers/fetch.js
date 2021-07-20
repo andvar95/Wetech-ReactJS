@@ -23,25 +23,31 @@ export const fetchSinToken = (endpoint,data,method = 'GET')=>{
 export const fetchConToken = (endpoint,data,method = 'GET')=>{
 
     const url = `${urlBase}${endpoint}`;
-    
-    if(method === 'GET'){
-        return fetch(url,
-            {method,
-                headers:{
-                    'Content-type':'application/json',
-                    'Authorization':'Bearer '+localStorage.getItem('token')
-                }})
-    }
-    else{
-        return fetch(url,{
-            method,
+   
+    return fetch(url+'?project=60ea1805d479c55a9d7933f9',
+        {method,
             headers:{
                 'Content-type':'application/json',
                 'Authorization':'Bearer '+localStorage.getItem('token')
-            },
-            body:JSON.stringify(data)
-        })
-    }
+            }})
+    // if(method === 'GET'){
+    //     return fetch(url,
+    //         {method,
+    //             headers:{
+    //                 'Content-type':'application/json',
+    //                 'Authorization':'Bearer '+localStorage.getItem('token')
+    //             }})
+    // }
+    // else{
+    //     return fetch(url,{
+    //         method,
+    //         headers:{
+    //             'Content-type':'application/json',
+    //             'Authorization':'Bearer '+localStorage.getItem('token')
+    //         },
+    //         body:JSON.stringify(data)
+    //     })
+    // }
     
 }
 

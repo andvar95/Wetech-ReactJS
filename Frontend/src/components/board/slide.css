@@ -1,5 +1,6 @@
 .slide{
     width: 280px !important;
+    position: absolute;
 }
 
 .btn-toggle {

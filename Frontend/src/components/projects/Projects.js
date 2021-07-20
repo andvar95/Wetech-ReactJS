@@ -11,11 +11,11 @@ export const Projects = () => {
   
     useEffect(()=>{
         dispatch(getAll('project'))
-        dispatch(getAll('users'))
 
     },[dispatch])
     return (
         <>
+        <h1>Projects</h1>
         {items.project && <div className="wrap-content">
 
             
@@ -23,7 +23,6 @@ export const Projects = () => {
                 <div key={i} className="project__containerProjects">
                     <span><img src={project.img} alt="ProjectPhoto"/> </span> 
                     <span className="text"> {project.name}</span>
-
                 </div>
             ))
             }

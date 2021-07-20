@@ -1,7 +1,10 @@
 import React from "react";
 import { useForm } from "../../hooks/useForm";
 import { v4 as uuidv4 } from "uuid";
+import { useDispatch } from "react-redux";
+import {create}  from '../../actions/base';
 export const FormTeam = ({ onClose = (modal) => modal }) => {
+  const dispatch = useDispatch();
   const [
     formValues,
     handleInputChange,
@@ -19,12 +22,13 @@ export const FormTeam = ({ onClose = (modal) => modal }) => {
 
   const handleCreateTeam = (event) => {
     event.preventDefault();
+    dispatch(create('team',formValues));    
   };
   const handleAddMember = (event) => {
     console.log(event, "NUEVO");
     handleAddArray({ inputs: "", type: "members" });
   };
-  console.log("me estoy redijuando :(");
+  
 
   return (
     <div className="form__container">
@@ -49,7 +53,7 @@ export const FormTeam = ({ onClose = (modal) => modal }) => {
         />
         {members.map((member, i) => (
           <div key={uuidv4()}>
-            <label>Member {i}</label>
+            <label style={{color: 'black'}}>Member {i}</label>
             <input
               type="text"
               placeholder="members"

@@ -11,7 +11,7 @@ const keys = {
 export const getAll = (endpoint) =>{
     return async(dispatch,getState) =>{
         const res = await fetchConToken(endpoint,{},'GET')
-        const content = await res.json()
+        const content = await res.json();
         const field = keys[endpoint];
         console.log(keys[endpoint])
        console.log(content[field])
@@ -28,8 +28,9 @@ export const getAll = (endpoint) =>{
 export const create = (endpoint,body)=>{
     return async(dispatch,getState) =>{
         const res = await fetchConToken(endpoint,body,'POST');
+        console.log("RESPUESTA",res);
         const content = await res.json();
-
+        console.log("respuestjson",content);
         const {items} = getState();
         dispatch({type:types.create,payload:content,currentState:items,field:endpoint})
     }
@@ -49,7 +50,6 @@ export const remove = (endpoint,body)=>{
     return async(dispatch,getState) =>{
         const res = await fetchConToken(endpoint,body,'DELETE');
         const content = await res.json();
-
         const {items} = getState();
         dispatch({type:types.delete,payload:content,currentState:items,field:endpoint})
     }

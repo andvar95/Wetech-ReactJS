@@ -15,7 +15,7 @@ export const AppRouter = () => {
     const dispatch = useDispatch()
     const {token} = useSelector(state=>state.auth)
 
-    console.log(token)
+    
   
     useEffect(()=>{
         dispatch(checkAuth())
@@ -29,14 +29,14 @@ export const AppRouter = () => {
 
                 <div>
                     <Switch>
-                        <PrivateRoute
-                        exact
-                        isAuthenticated={!!token}
-                        path="/" 
+                        <Route
+                         exact
+                         isAuthenticated={!!token}
+                         path="/" 
                         component={Board}
                         />
 
-                    <PrivateRoute
+                    <Route
                         exact
                         isAuthenticated={!!token}
                         path="/projects" 
@@ -45,9 +45,9 @@ export const AppRouter = () => {
 
                     
             
-                        <PublicRoute 
+                        <Route 
                             
-                            isAuthenticated={!!token}
+                            // isAuthenticated={!!token}
                             path="/auth" 
                             component={AuthRouter}
                             />
