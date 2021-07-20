@@ -26,7 +26,8 @@ export const AuthRouter = () => {
                     path="/auth/login"
                     component={LoginScreen}
                     />
-                <Redirect to="/auth/login" />
+                    
+                
               
 
             </Switch>

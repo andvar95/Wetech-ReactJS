@@ -2,12 +2,12 @@ import React from "react";
 import { useDispatch,useSelector,useState} from "react-redux";
 import { Link } from "react-router-dom";
 import {useForm} from "../../hooks/useForm";
-//import { login} from "../../actions/auth";
+import { startLogin} from "../../actions/auth";
 
 
 export const LoginScreen = ({history}) => {
 
-  //const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
 
   //const {loading} = useSelector(state=>state.ui) 
@@ -22,6 +22,8 @@ console.log(history);
   const handleLogin = (event) =>{
     event.preventDefault();
     history.replace('/');
+    dispatch(startLogin(email,password))
+  
   }
   
 
