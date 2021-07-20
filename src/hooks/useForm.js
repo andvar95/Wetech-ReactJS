@@ -23,7 +23,7 @@ export const useForm = ( initialState = {} ) => {
         let iObj =  target.target.name;        
         setValues({
             ...values,
-          'members': arr.map((el,i)=>
+          [type]: arr.map((el,i)=>
             {if (i===Number(iObj)){                
                 return target.target.value;
             }
@@ -37,7 +37,7 @@ export const useForm = ( initialState = {} ) => {
        const arr = values[type];
         setValues({
             ...values,
-          'members': arr.filter((el,i)=>
+          [type]: arr.filter((el,i)=>
             {if (i===Number(idx)){
                 console.log('entro');
                 return false;
@@ -52,7 +52,7 @@ export const useForm = ( initialState = {} ) => {
         setValues(
             {
                 ...values,
-            'members' : [...arr,inputs]////TODO: AVERIGUAR COMO PUEDO OBTENER DINAMIENCAMENTE ESETE MEMBERS
+            [type] : [...arr,inputs]////TODO: AVERIGUAR COMO PUEDO OBTENER DINAMIENCAMENTE ESETE MEMBERS
             }
         );
     }
