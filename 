@@ -1,0 +1,79 @@
+[33mcommit 12fa54632694ee17a7684467f04763fd9c4b99ad[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: andvar95 <varleo.95@gmail.com>
+Date:   Tue Jul 20 13:21:39 2021 -0500
+
+    add backend
+
+[33mcommit bdf7ff0413b62cd41b33bb63143855194fd5c998[m
+Merge: 96e85f3 83c74d8
+Author: andvar95 <varleo.95@gmail.com>
+Date:   Tue Jul 20 12:25:13 2021 -0500
+
+    merge
+
+[33mcommit 96e85f32144df476f956ecfc670b7b77fa146f6c[m
+Author: andvar95 <varleo.95@gmail.com>
+Date:   Tue Jul 20 12:24:33 2021 -0500
+
+    routes
+
+[33mcommit 83c74d8cc80fbe78571ca7a33da092c76495d6f9[m
+Merge: 909686c ddff921
+Author: cristhian <disruptivecrisfon6@gmail.com>
+Date:   Tue Jul 20 12:00:24 2021 -0500
+
+    merged crisfon6
+
+[33mcommit 909686c9a78895961de95154022fa67bf9efecfa[m
+Author: cristhian <disruptivecrisfon6@gmail.com>
+Date:   Tue Jul 20 11:56:13 2021 -0500
+
+    ready useFormReactive
+
+[33mcommit af7990d6417f503d741beea2f2818b49ea150466[m
+Author: cristhian <disruptivecrisfon6@gmail.com>
+Date:   Tue Jul 20 11:50:07 2021 -0500
+
+    solo falta obtener el campo de string para setvalues dinamicamente
+
+[33mcommit 66b694e9044f149e935cb2b5328cc77083037643[m
+Author: andvar95 <varleo.95@gmail.com>
+Date:   Mon Jul 19 19:14:01 2021 -0500
+
+    router 2.0
+
+[33mcommit ddff92132511c6fc056cdf9938964a297f359558[m
+Author: andvar95 <varleo.95@gmail.com>
+Date:   Mon Jul 19 18:54:00 2021 -0500
+
+    update
+
+[33mcommit a1ae65f81657df1587ab310d94b53a389c225db5[m
+Author: cristhian <disruptivecrisfon6@gmail.com>
+Date:   Mon Jul 19 18:47:36 2021 -0500
+
+    visual
+
+[33mcommit a06e7c926e458d8915f675363115b583d1070b2d[m
+Author: cristhian <disruptivecrisfon6@gmail.com>
+Date:   Mon Jul 19 17:39:53 2021 -0500
+
+    nada
+
+[33mcommit b3aa186e05faaf171d5ea9f2e13a7a937166f104[m
+Author: andvar95 <varleo.95@gmail.com>
+Date:   Mon Jul 19 17:05:08 2021 -0500
+
+    login register protec route
+
+[33mcommit 295eb5ce0c33ec476c051284ce8611328c5d7644[m
+Author: andvar95 <varleo.95@gmail.com>
+Date:   Mon Jul 19 09:29:43 2021 -0500
+
+    form sprint modal
+
+[33mcommit 03431e00365fe80248aff4a4198ea72890893834[m
+Author: andvar95 <varleo.95@gmail.com>
+Date:   Mon Jul 19 08:41:27 2021 -0500
+
+    Start 19/07/21
