@@ -1,0 +1,17 @@
+module.exports = {
+    User: require("./User"),
+    Role: require("./Role"),
+    Task: require("./Task"),
+    Tag: require("./Tag"),
+    Status: require("./Status"),
+    Project: require("./Project"),
+    Stats: require("./Stats"),
+    Team: require("./Team"),
+    Sprint: require("./Sprint"),
+    Auth: require("./Auth"),
+    Uploads: require("./Uploads"),
+    Social: require("./Social"),
+    Dev: require("./Dev"),
+    Enterprise: require("./Enterprise"),
+    Search: require("./Search"),
+};
