@@ -22,10 +22,15 @@ export const fetchSinToken = (endpoint,data,method = 'GET')=>{
 
 export const fetchConToken = (endpoint,data,method = 'GET')=>{
 
-    const url = `${urlBase}/${endpoint}`;
+    const url = `${urlBase}${endpoint}`;
     
     if(method === 'GET'){
-        return fetch(url)
+        return fetch(url,
+            {method,
+                headers:{
+                    'Content-type':'application/json',
+                    'Authorization':'Bearer '+localStorage.getItem('token')
+                }})
     }
     else{
         return fetch(url,{

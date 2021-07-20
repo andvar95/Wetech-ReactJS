@@ -39,3 +39,12 @@ main{
 .pointer{
     cursor: pointer;
 }
+
+.wrap-content{
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.wrap-content div {
+    margin:10px;
+}

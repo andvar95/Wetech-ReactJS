@@ -1,13 +1,36 @@
-import React from 'react'
+import React,{useEffect, useState} from 'react'
+import {useDispatch, useSelector} from "react-redux";
+import { getAll} from "../../actions/base";
 
 export const Projects = () => {
-    return (
-        <div>
 
-            <div>
-                Projects
-            </div>
+    const dispatch = useDispatch()
+
+    const {items} = useSelector(state=>state)
+   
+  
+    useEffect(()=>{
+        dispatch(getAll('project'))
+        dispatch(getAll('tag'))
+
+    },[dispatch])
+    return (
+        <>
+        {items.project && <div className="wrap-content">
+
             
-        </div>
+            {items.project.map((project,i)=>(
+                <div key={i} className="project__containerProjects">
+                    <span><img src={project.img} alt="ProjectPhoto"/> </span> 
+                    <span className="text"> {project.name}</span>
+
+                </div>
+            ))
+            }
+
+            
+            
+        </div>}
+        </>
     )
 }

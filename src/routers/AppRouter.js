@@ -4,10 +4,11 @@ import {AuthRouter} from "./AuthRouter"
 import {useDispatch, useSelector} from "react-redux";
 import { checkAuth } from '../actions/auth';
 import {Navbar} from "../components/iu/Navbar"
-import {Board} from "../components/board/Board";
 import {PrivateRoute} from "./PrivateRoute";
-import { Projects } from "../components/projects/Projects";
 import { PublicRoute} from "./PublicRoute"; 
+import {HomeRoute} from "./HomeRoute";
+import {Board} from "../components/board/Board";
+import {Projects} from "../components/projects/Projects";
 
 export const AppRouter = () => {
 
@@ -41,6 +42,8 @@ export const AppRouter = () => {
                         path="/projects" 
                         component={Projects}
                         />
+
+                    
             
                         <PublicRoute 
                             

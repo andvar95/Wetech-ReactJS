@@ -9,7 +9,14 @@ export const types ={
     authStartRegister:'[auth] Start Register',
     authStartTokenRenew: '[auth] Start token renew',
     authIsAuth: '[auth] is Auth',
-    authLogout:'[auth] Logout'
+    authLogout:'[auth] Logout',
+
+    getAll:'[base] Get',
+    getById:'[base] Get By Id',
+    getByProject:'[base] Get By Project',
+    create:'[base] Create',
+    update:'[base] Update',
+    delete:'[base] Delete'
 
 
 }
