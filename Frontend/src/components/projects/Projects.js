@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import { getAll} from "../../actions/base";
+import { getAll, create} from "../../actions/base";
 
 export const Projects = () => {
 
@@ -13,6 +13,7 @@ export const Projects = () => {
         dispatch(getAll('project'))
 
     },[dispatch])
+
     return (
         <>
         <h1>Projects</h1>
