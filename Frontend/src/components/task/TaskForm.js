@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "../../hooks/useForm";
+import { v4 as uuidv4 } from "uuid";
 
 export const TaskForm = () => {
   const [
@@ -37,7 +38,14 @@ export const TaskForm = () => {
 
   const handleCreateTask = (event) => {
     event.preventDefault();
+    console.log(formValues);
+    // TODO: enviar datos al backend
   };
+
+  const teams = ["Tback", "Tfront"];
+  const members = ["Andres", "Cristian", "Sergio"];
+  const sprints = ["Sprint 1", "Sprint 2"];
+  const etiquetas = ["Vue", "Angular", "React"];
 
   return (
     <div>
@@ -148,8 +156,11 @@ export const TaskForm = () => {
                       onChange={handleInputChange}
                       className="form-select"
                     >
-                      <option value="TFront">Team frontend</option>
-                      <option value="TBack">Team Backend</option>
+                      {teams.map((team, i) => (
+                        <option key={uuidv4()} value={team}>
+                          {team}
+                        </option>
+                      ))}
                     </select>
                   </div>
 
@@ -162,14 +173,17 @@ export const TaskForm = () => {
                       onChange={handleInputChange}
                       className="form-select"
                     >
-                      <option value="Andres">Andres</option>
-                      <option value="Sergio">Sergio</option>
-                      <option value="Cristian">Cristian</option>
+                      {members.map((member, i) => (
+                        <option key={uuidv4()} value={member}>
+                          {member}
+                        </option>
+                      ))}
                     </select>
                     <button className="btn btn-primary">Add member</button>
                   </div>
                 </div>
               </li>
+
               <li className="list-group-item">
                 <div className="row">
                   <div className="col-6">
@@ -180,7 +194,13 @@ export const TaskForm = () => {
                       name="sprint"
                       onChange={handleInputChange}
                       className="form-select"
-                    ></select>
+                    >
+                      {sprints.map((sprint, i) => (
+                        <option key={uuidv4()} value={sprint}>
+                          {sprint}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                   <div className="col-6">
                     <label htmlFor="tags" className="form-label">
@@ -191,19 +211,21 @@ export const TaskForm = () => {
                       onChange={handleInputChange}
                       className="form-select"
                     >
-                      <option value="Vue" selected>
-                        VueJS
-                      </option>
-                      <option value="react">React</option>
-                      <option value="angular">Angular</option>
+                      {etiquetas.map((etiqueta, i) => (
+                        <option key={uuidv4()} value={etiqueta}>
+                          {etiqueta}
+                        </option>
+                      ))}
                     </select>
-                    <button className="btn btn-primary">Add tag</button>
+                    <button className="btn btn-primary" onClick="">Add tag</button>
                   </div>
                 </div>
               </li>
             </ul>
           </div>
-          <button className="btn btn-primary" type="submit">Create task</button>
+          <button className="btn btn-primary" type="submit">
+            Create task
+          </button>
         </div>
       </form>
     </div>
