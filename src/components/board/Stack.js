@@ -1,10 +1,11 @@
-import React from 'react'
-
+import React from "react";
+import Stacks from "../stacks/StacksDnD";
 export const Stack = () => {
-    return (
-        <div>
-            <div>Stack</div>
-            
-        </div>
-    )
-}
+  return (
+    <div>
+      <div className="">
+        <Stacks />
+      </div>
+    </div>
+  );
+};
