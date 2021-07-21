@@ -17,8 +17,11 @@ export const FormTeam =  ({ onClose = (modal) => modal ,team={
   const { items } = useSelector((state) => state);
   console.log("TEAM FOR EDIT",team.name);
   
-const nx = String(team.name) || "hola mundo";
+let mem = team.members.map((member) => {
+  return member._id;
 
+});
+console.log("mem",mem)
   useEffect(() => {
     dispatch(getAll("users"));
   }, [dispatch]);
@@ -31,7 +34,7 @@ const nx = String(team.name) || "hola mundo";
     handleInputGroupChange,
     handleRemoveArray,
   ] = useForm({
-    name:nx,
+    name:team.name,
     description:team.description,
     members:team.members,
     project:team.project,    
