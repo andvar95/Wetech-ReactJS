@@ -5,24 +5,27 @@ import { create, getAll } from "../../actions/base";
 
 import { useDispatch, useSelector } from "react-redux";
 
-export const FormTeam =  ({ onClose = (modal) => modal ,team={
-  name: "",
-  description: "",
-  project: localStorage.getItem("currentProject"),
-  members: [localStorage.getItem("user")],
-}}) => {
- 
+export const FormTeam = ({
+  onClose = (modal) => modal,
+  team = {
+    name: "",
+    description: "",
+    project: localStorage.getItem("currentProject"),
+    members: [localStorage.getItem("user")],
+  },
+}) => {
   const dispatch = useDispatch();
 
   const { items } = useSelector((state) => state);
-  console.log("TEAM FOR EDIT",team.name);
-  
-const nx = String(team.name) || "hola mundo";
+  console.log("TEAM FOR EDIT", team.name);
+
+  const nx = String(team.name) || "hola mundo";
 
   useEffect(() => {
     dispatch(getAll("users"));
   }, [dispatch]);
-  console.log("TEMANAME",team.name)
+
+  console.log("TEMANAME", team.name);
   const [
     formValues,
     handleInputChange,
@@ -31,12 +34,11 @@ const nx = String(team.name) || "hola mundo";
     handleInputGroupChange,
     handleRemoveArray,
   ] = useForm({
-    name:nx,
-    description:team.description,
-    members:team.members,
-    project:team.project,    
-  }
-    );
+    name: nx,
+    description: team.description,
+    members: team.members,
+    project: team.project,
+  });
 
   const { name, description, members } = formValues;
 
@@ -76,7 +78,15 @@ const nx = String(team.name) || "hola mundo";
 
         {members.map((member, i) => (
           <div key={uuidv4()}>
-            <select name="cars" id="cars" value={members[i]} name={i} onChange={(e)=>handleInputGroupChange({ target:e ,type:"members"})}>
+            <select
+              name="cars"
+              id="cars"
+              value={members[i]}
+              name={i}
+              onChange={(e) =>
+                handleInputGroupChange({ target: e, type: "members" })
+              }
+            >
               {items.users &&
                 items.users.map((user) => (
                   <option key={user._id} value={user._id}>

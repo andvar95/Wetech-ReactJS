@@ -1,8 +1,10 @@
 import React from "react";
 import { useForm } from "../../hooks/useForm";
 import { v4 as uuidv4 } from "uuid";
-import { getAll } from "../../actions/base";
+import { create, getAll } from "../../actions/base";
 import { ListMembers } from "./ListMembers";
+
+import { useDispatch } from "react-redux";
 
 export const TaskForm = () => {
   const [
@@ -38,21 +40,23 @@ export const TaskForm = () => {
     team,
   } = formValues;
 
-  const handleCreateTask = (event) => {
-    event.preventDefault();
-    console.log(formValues);
-    // reset()
-  };
+  const dispatch = useDispatch();
 
   const handleAddMember = (event) => {
+    event.preventDefault();
     handleAddArray({ inputs: "", type: "userId" });
   };
 
   const handleAddTag = (event) => {
+    event.preventDefault();
     handleAddArray({ inputs: "", type: "tags" });
   };
 
-  // const prueba = getAll('http://localhost:3001/api/users');
+  const handleCreateTask = (event) => {
+    event.preventDefault();
+    dispatch(create("task", formValues));
+    reset();
+  };
 
   const teams = ["Tback", "Tfront"];
   const members = ["Andres", "Cristian", "Sergio"];
@@ -71,7 +75,7 @@ export const TaskForm = () => {
 
               <li className="list-group-item">
                 <div className="row">
-                  <div className="col-6">
+                  <div className="col-7">
                     <label htmlFor="name" className="form-label">
                       Task name:
                     </label>
@@ -84,7 +88,7 @@ export const TaskForm = () => {
                       onChange={handleInputChange}
                     ></input>
                   </div>
-                  <div className="col-6">
+                  <div className="col-5">
                     <label htmlFor="duration" className="form-label">
                       Deadline:
                     </label>
@@ -162,14 +166,15 @@ export const TaskForm = () => {
                 <div className="row">
                   <div className="col-6">
                     <label htmlFor="members" className="form-label">
-                      Select team:
+                      Team:
                     </label>
                     <input
                       className="form-control"
-                      name="sprint"
+                      name="team"
                       onChange={handleInputChange}
                       list="listTeam"
-                      placeholder="Member..."
+                      placeholder="Select team"
+                      value={team}
                     ></input>
                     <datalist id="listTeam">
                       {teams.map((team, i) => (
@@ -185,7 +190,8 @@ export const TaskForm = () => {
                       Members:
                     </label>
                     <ListMembers
-                      handle={handleInputGroupChange}
+                      handleAdd={handleInputGroupChange}
+                      handleDelete={handleRemoveArray}
                       value={userId}
                       data={members}
                       key={uuidv4()}
@@ -212,7 +218,8 @@ export const TaskForm = () => {
                       name="sprint"
                       onChange={handleInputChange}
                       list="listSprints"
-                      placeholder="Member..."
+                      placeholder="Select sprint"
+                      value={sprint}
                     ></input>
                     <datalist id="listSprints">
                       {sprints.map((sprint, i) => (
@@ -227,16 +234,14 @@ export const TaskForm = () => {
                       Tags:
                     </label>
                     <ListMembers
-                      handle={handleInputGroupChange}
+                      handleAdd={handleInputGroupChange}
+                      handleDelete={handleRemoveArray}
                       value={tags}
                       data={etiquetas}
                       key={uuidv4()}
                       type="tags"
                     />
-                    <button
-                      onClick={handleAddTag}
-                      className="btn btn-primary"
-                    >
+                    <button onClick={handleAddTag} className="btn btn-primary">
                       Add tag
                     </button>
                   </div>
