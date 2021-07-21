@@ -15,8 +15,8 @@ export const ListMembers = ({ handleAdd, handleDelete, value, data, type }) => {
               name={i}
               onChange={(e) => handleAdd({ target: e, type })}
             >
-              {data.map((d, i) => (
-                <option key={i} value={d.id}>
+              {data && data.map((d, i) => (
+                <option key={i} value={d._id}>
                   {d.name}
                 </option>
               ))}

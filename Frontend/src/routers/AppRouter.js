@@ -13,6 +13,7 @@ import { PrivateRoute } from "./PrivateRoute";
 
 import { Board } from "../components/board/Board";
 import { Projects } from "../components/projects/Projects";
+import { HomeRoute } from "./HomeRoute";
 import { Tasks } from "../components/task/Tasks";
 
 export const AppRouter = () => {
@@ -28,18 +29,26 @@ export const AppRouter = () => {
       <div>
         <Switch>
           <PrivateRoute
-            exact
             isAuthenticated={!!token}
-            path="/"
-            component={Board}
+            path="/home"
+            component={HomeRoute}
           />
+          {/*
 
-          <PrivateRoute
-            exact
-            isAuthenticated={!!token}
-            path="/projects"
-            component={Projects}
-          />
+                        <PrivateRoute
+                         exact
+                         isAuthenticated={!!token}
+                         path="/" 
+                        component={Board}
+                        />
+
+                    <PrivateRoute
+                        exact
+                        isAuthenticated={!!token}
+                        path="/projects" 
+                        component={Projects}
+                        />
+                        */}
 
           <Route
             // isAuthenticated={!!token}

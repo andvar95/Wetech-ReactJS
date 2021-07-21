@@ -4,11 +4,16 @@ import { v4 as uuidv4 } from "uuid";
 import { create, getAll } from "../../actions/base";
 import { ListMembers } from "./ListMembers";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export const TaskForm = ({task}) => {
   const itemTask = { ...task };
   const dispatch = useDispatch();
+
+  const { items } = useSelector(
+    (state) => state,
+    () => {}
+  );
 
   useEffect(() => {
     dispatch(getAll("users"));
@@ -80,10 +85,7 @@ export const TaskForm = ({task}) => {
   };
 
   const teams = ["Tback", "Tfront"];
-  const members = [
-    {id: 1, name: "andres"},
-    {id:2, name: "sergio"}
-  ]
+  const members = items.users;
   
   const sprints = ["Sprint 1", "Sprint 2"];
   const etiquetas = ["Vue", "Angular", "React"];
