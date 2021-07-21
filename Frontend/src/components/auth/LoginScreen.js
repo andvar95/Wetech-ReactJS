@@ -13,15 +13,15 @@ export const LoginScreen = ({history}) => {
   //const {loading} = useSelector(state=>state.ui) 
 console.log(history);
   const [formValues, handleInputChange ]  = useForm({
-    email:'andres@gmail.com',
-    password:'123456'
+    email:'varelo@gmail.com',
+    password:'1234'
   })
 
   const {email,password} = formValues;
 
   const handleLogin = (event) =>{
     event.preventDefault();
-    history.replace('/');
+    // history.replace('/');
     dispatch(startLogin(email,password))
     
   

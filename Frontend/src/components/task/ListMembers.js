@@ -8,6 +8,7 @@ export const ListMembers = ({ handle, value, data, type }) => {
         <div>
           <input
             className="form-control"
+            key={uuidv4()}
             name={type+i}
             value={value[i]}
             onChange={(e) => {
@@ -17,8 +18,8 @@ export const ListMembers = ({ handle, value, data, type }) => {
             placeholder={type + " " + (i+1)}
           ></input>
           <datalist id={"list"+type}>
-            {data.map(d => (
-              <option key={uuidv4()} value={d}>
+            {data.map((d,i) => (
+              <option key={uuidv4()+i} value={d}>
                 {d}
               </option>
             ))}

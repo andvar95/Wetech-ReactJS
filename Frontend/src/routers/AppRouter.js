@@ -14,14 +14,12 @@ import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
 import { HomeRoute } from "./HomeRoute";
 import { Board } from "../components/board/Board";
-import { Projects } from "../components/projects/Projects"
+import { Projects } from "../components/projects/Projects";
 import { Tasks } from "../components/task/Tasks";
 
 export const AppRouter = () => {
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.auth);
-
-  console.log(token);
 
   useEffect(() => {
     dispatch(checkAuth());
@@ -31,27 +29,22 @@ export const AppRouter = () => {
     <Router>
       <div>
         <Switch>
-          <PrivateRoute
-            exact
-            isAuthenticated={!!token}
-            path="/"
-            component={Board}
-          />
+          <Route exact isAuthenticated={!!token} path="/" component={Board} />
 
-          <PrivateRoute
+          <Route
             exact
             isAuthenticated={!!token}
             path="/projects"
             component={Projects}
           />
 
-          <PublicRoute
-            isAuthenticated={!!token}
+          <Route
+            // isAuthenticated={!!token}
             path="/auth"
             component={AuthRouter}
           />
 
-          <Route exact path="/tasks" component={Tasks} />
+          <Route apth="/tasks" component={Tasks} />
 
           <Redirect to="/auth/login" />
         </Switch>

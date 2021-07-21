@@ -20,12 +20,13 @@ export const fetchSinToken = (endpoint,data,method = 'GET')=>{
 }
 
 
-export const fetchConToken = (endpoint,data,method = 'GET')=>{
-
+export const fetchConToken = (endpoint,data,method)=>{
+    console.log("TYPE PEITTION",method);
     const url = `${urlBase}${endpoint}`;
-    
-    if(method === 'GET'){
-        return fetch(url,
+   
+    let project = localStorage.getItem("currentProject");
+    if(method === 'GET' || method === 'DELETE'){
+        return fetch(url+"?project="+project,
             {method,
                 headers:{
                     'Content-type':'application/json',
@@ -33,7 +34,7 @@ export const fetchConToken = (endpoint,data,method = 'GET')=>{
                 }})
     }
     else{
-        return fetch(url,{
+        return fetch(url+"?project="+project,{
             method,
             headers:{
                 'Content-type':'application/json',

@@ -7,7 +7,7 @@ const { Team: Service } = require("../services");
 
 const controller = new Controller(Service);
 
-router.get("/", Auth, TeamVerify.teamVerify("PO", "DEV", "TL", "SM"), (req, res) => controller.list(req, res, [{ path: 'projects' }, { path: "members" }]));
+router.get("/", Auth,TeamVerify.teamVerify("PO", "DEV", "TL", "SM"), (req, res) => controller.list(req, res, [{ path: 'projects' }, { path: "members" }]))
 router.get("/:id", Auth, TeamVerify.teamVerify("PO", "DEV", "TL", "SM"), (req, res) => controller.getOne(req, res, [{ path: 'projects' }, { path: "members" }]));
 router.post("/", Auth, controller.create);
 router.put("/:id", [Auth, TeamVerify.teamVerify("PO", "DEV", "TL", "SM"), ], controller.update);

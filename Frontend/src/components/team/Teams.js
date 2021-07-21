@@ -1,16 +1,42 @@
-import React, { useState } from "react";
+import React,{useEffect, useState} from 'react'
 import Modal from "react-modal";
 import { FormTeam } from "./FormTeam";
+import {useDispatch, useSelector} from "react-redux";
 import {v4 as uuidv4} from 'uuid';
+import { getAll, create,remove} from "../../actions/base";
 export const Teams = () => {
-  const [modal, setModal] = useState(false);
 
-  const handleCloseModal = () => {};
+  const dispatch = useDispatch()
+
+    const {items} = useSelector(state=>state)
+   const [teamSelect, SetTeamSelect] = useState(undefined);
+  
+    useEffect(()=>{
+        dispatch(getAll('team'))
+    },[dispatch])
+
+    
+  const [modal, setModal] = useState(false);
+console.log("items team",items);
+  const handleCloseModal = () => {
+
+  };
 //TODO: MAKE EDITABLE AND REMOVE
+
   const handleOpenModal = () => {
     setModal(true);
   };
-  const teams = ["maravilla", "avengers"];
+  const handleEdit = (team)=>{
+    SetTeamSelect(team);
+    console.log("TEAMS",team);
+    setModal(true);
+  }
+  const handleDelete = (id) => {
+    
+      dispatch(remove('team/'+id));
+  
+  };
+  
   return (
     <>
       <div className="row">
@@ -35,34 +61,33 @@ export const Teams = () => {
       </div>
       <div className="collapse show" id="team-collapse">
         <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-          {teams.map((team) => (
+          {items.team && items.team.map((team) => (
             <div className="row"
-            key={uuidv4()}>
+            key={team._id}>
               <div className="col-md-8">
-                <li className="link-ligth rounded">{team}</li>
+                <li className="link-ligth rounded">{team.name}</li>
               </div>
               <div className="col-md-4">
               <button
             className="btn btn-warning btn-sm"
-            onClick={handleOpenModal}            
+            onClick={()=>handleEdit(team)}            
           >
             <i className="fas fa-pen"></i>
           </button>
           <button
             className="btn btn-danger btn-sm"
-            onClick={handleOpenModal}            
+            onClick={()=>handleDelete(team._id)}            
           >
             <i className="fas fa-trash"></i>
           </button>
               </div>
             </div>
           ))}
-
         </ul>
       </div>
 
       <div className={modal ? "modal" : "none"}>
-        <FormTeam onClose={(modal) => setModal(modal)} />
+        <FormTeam team={teamSelect} onClose={(modal) => setModal(modal)} />
       </div>
     </>
   );
