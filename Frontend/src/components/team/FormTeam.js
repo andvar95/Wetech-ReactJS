@@ -27,6 +27,7 @@ export const FormTeam = ({ onClose = (modal) => modal, team }) => {
     handleRemoveArray,
     setValues,
   ] = useForm(itemTeam);
+
   useEffect(() => {
     setValues({
       name: team.name,
@@ -35,6 +36,7 @@ export const FormTeam = ({ onClose = (modal) => modal, team }) => {
       project: team.project,
     });
   }, [team]);
+  
   const { name, description, members } = formValues;
 
   const handleCreateTeam = (event) => {

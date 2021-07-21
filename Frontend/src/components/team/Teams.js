@@ -1,14 +1,12 @@
 import React,{useEffect, useState} from 'react'
-import Modal from "react-modal";
 import { FormTeam } from "./FormTeam";
 import {useDispatch, useSelector} from "react-redux";
-import {v4 as uuidv4} from 'uuid';
-import { getAll, create,remove} from "../../actions/base";
+import { getAll, remove} from "../../actions/base";
 export const Teams = () => {
 
   const dispatch = useDispatch()
 
-    const {items} = useSelector(state=>state,()=>{})
+  const items = useSelector(state=>state.items.team)
    const [teamSelect, SetTeamSelect] = useState({
     name: "",
     description: "",
@@ -31,10 +29,9 @@ export const Teams = () => {
       description: "",
       project: localStorage.getItem("currentProject"),
       members: [localStorage.getItem("user")],
-    
-    
     });
   };
+  
   const handleEdit = (team)=>{
     
     SetTeamSelect({
@@ -77,7 +74,7 @@ export const Teams = () => {
       </div>
       <div className="collapse show" id="team-collapse">
         <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-          {items.team && items.team.map((team) => (
+          {items && items.map((team) => (
             <div className="row"
             key={team._id}>
               <div className="col-md-8">

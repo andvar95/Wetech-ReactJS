@@ -19,9 +19,10 @@ console.log("Values",values)
         });
     }
     const handleInputGroupChange = ({ target ,type}) => {
-        
+        console.log(target.target.value);
         const arr = values[type];        
-        let iObj =  target.target.name;        
+        let iObj =  target.target.name;
+        console.log(iObj);       
         setValues({
             ...values,
           [type]: arr.map((el,i)=>

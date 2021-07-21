@@ -2,29 +2,25 @@ import React from "react";
 import { v4 as uuidv4 } from "uuid";
 
 export const ListMembers = ({ handleAdd, handleDelete, value, data, type }) => {
+  console.log(value);
   return (
     <>
       {value.map((v, i) => (
         <div className="row align-items-start" key={uuidv4()}>
           <div className="col-10">
-            <input
-              className="form-control"
-              name={type + i}
+            <select
+              name="cars"
+              id="cars"
               value={value[i]}
-              onChange={(e) => {
-                handleAdd({ target: e, type });
-              }}
-              list={"list" + type}
-              placeholder={type + " " + (i + 1)}
-            ></input>
-
-            <datalist id={"list" + type}>
+              name={i}
+              onChange={(e) => handleAdd({ target: e, type })}
+            >
               {data.map((d, i) => (
-                <option key={i} value={d}>
-                  {d}
+                <option key={i} value={d.id}>
+                  {d.name}
                 </option>
               ))}
-            </datalist>
+            </select>
           </div>
           <div className="col-1">
             <button

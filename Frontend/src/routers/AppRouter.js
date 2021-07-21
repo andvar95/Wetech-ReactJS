@@ -17,11 +17,7 @@ import { Tasks } from "../components/task/Tasks";
 
 export const AppRouter = () => {
   const dispatch = useDispatch();
-  const { auth } = useSelector(
-    (state) => state,
-    () => {}
-  );
-  const token = auth.token;
+  const { token } = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(checkAuth());
