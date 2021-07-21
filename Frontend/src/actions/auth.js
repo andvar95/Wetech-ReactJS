@@ -6,7 +6,10 @@ export const startLogin = (email,password) =>{
         const res = await fetchSinToken('auth/login',{email,password},'POST')
         const body = await res.json()
 
-        if(body) localStorage.setItem('token',body.token)
+        if(body) {localStorage.setItem('token',body.token);
+    localStorage.setItem('user',body.user);
+    
+    }
         dispatch(checkAuth())
 
         console.log(body);

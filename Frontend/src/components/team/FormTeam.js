@@ -10,7 +10,7 @@ export const FormTeam =  ({ onClose = (modal) => modal ,team}) => {
   const dispatch = useDispatch();
 
 
-  const { items } = useSelector(state=>state,()=>{});
+  const { items } = useSelector(state=>state);
   
 
     useEffect(() => {

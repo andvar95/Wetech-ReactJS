@@ -13,8 +13,8 @@ import {Projects} from "../components/projects/Projects";
 export const AppRouter = () => {
 
     const dispatch = useDispatch()
-    const {auth} = useSelector(state=>state,()=>{});
-const  token =auth.token;
+    const {token} =          useSelector(state=>state.auth);
+
   
   
     useEffect(()=>{

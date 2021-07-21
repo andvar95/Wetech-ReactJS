@@ -1,16 +1,12 @@
 import React,{useEffect, } from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import { getAll, create,update,remove} from "../../actions/base";
+import { getAll,remove} from "../../actions/base";
 
 export const Projects = ({history}) => {
 
     const dispatch = useDispatch()
 
-    const {items} = useSelector(state=>state,()=>{})
-
-    const handlePueba =() =>{
-        dispatch(remove('project'),{name:"hoa"})
-    }
+    const {project} = useSelector(state=>state.items);
    
   const handleSelectProject = (project)=>{      
       localStorage.setItem("currentProject",project._id);      
@@ -25,10 +21,10 @@ export const Projects = ({history}) => {
     return (
         <>
         <h1>Projects</h1>
-        {items.project && <div className="wrap-content">
+        {project && <div className="wrap-content">
 
             
-            {items.project.map((project,i)=>(
+            {project.map((project,i)=>(
                 <div key={i} className="project__containerProjects" onClick={()=>handleSelectProject(project)}>
                     <span><img src={project.img} alt="ProjectPhoto"/> </span> 
                     <span className="text"> {project.name}</span>
