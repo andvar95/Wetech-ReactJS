@@ -1,31 +1,23 @@
 import React, { useEffect } from "react";
 import { useForm } from "../../hooks/useForm";
 import { v4 as uuidv4 } from "uuid";
-import { create, getAll } from "../../actions/base";
+import { create, getAll,update } from "../../actions/base";
 
 import { useDispatch, useSelector } from "react-redux";
 
-export const FormTeam =  ({ onClose = (modal) => modal ,team={
-  name: "",
-  description: "",
-  project: localStorage.getItem("currentProject"),
-  members: [localStorage.getItem("user")],
-}}) => {
- 
+export const FormTeam =  ({ onClose = (modal) => modal ,team}) => {
+  let itemTeam = {...team};
   const dispatch = useDispatch();
 
   const { items } = useSelector((state) => state);
   console.log("TEAM FOR EDIT",team.name);
-  
-let mem = team.members.map((member) => {
-  return member._id;
 
-});
-console.log("mem",mem)
-  useEffect(() => {
+    useEffect(() => {
+    
     dispatch(getAll("users"));
-  }, [dispatch]);
-  console.log("TEMANAME",team.name)
+  }, [dispatch]); 
+
+ 
   const [
     formValues,
     handleInputChange,
@@ -33,24 +25,34 @@ console.log("mem",mem)
     handleAddArray,
     handleInputGroupChange,
     handleRemoveArray,
-  ] = useForm({
-    name:team.name,
-    description:team.description,
-    members:team.members,
-    project:team.project,    
-  }
+    setValues
+  ] = useForm(
+    
+    itemTeam
     );
-
+    useEffect(() => {    
+    
+    setValues({
+      name:team.name,
+      description:team.description,
+      members: team.members,
+      project: team.project,
+    })
+    }, [team]);
   const { name, description, members } = formValues;
 
   const handleCreateTeam = (event) => {
     event.preventDefault();
+  if(    team._id){//edit
+    dispatch(update("team", formValues));
+  }
+  else{
     dispatch(create("team", formValues));
+  }
     reset();
   };
   const handleAddMember = (event) => {
     event.preventDefault();
-
     console.log(event, "NUEVO");
     handleAddArray({ inputs: "", type: "members" });
   };
@@ -124,8 +126,7 @@ console.log("mem",mem)
         </button>
 
         <button
-          className="btn btn-primary btn-block"
-          type="submit"
+          className="btn btn-primary btn-block"          
           onClick={handleCreateTeam}
         >
           Create Team
