@@ -9,7 +9,7 @@ import templateSocial from "../../helpers/templateSocial";
 export const RegisterScreen = () => {
 
   const dispatch = useDispatch(); //dispatch actions
-  console.log(templateSocial)
+  
 
 
   const [formValues, handleInputChange ]  = useForm({

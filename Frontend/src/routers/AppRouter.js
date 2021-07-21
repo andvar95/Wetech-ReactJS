@@ -9,6 +9,7 @@ import {PrivateRoute} from "./PrivateRoute";
 
 import {Board} from "../components/board/Board";
 import {Projects} from "../components/projects/Projects";
+import { HomeRoute } from './HomeRoute';
 
 export const AppRouter = () => {
 
@@ -29,6 +30,16 @@ export const AppRouter = () => {
 
                 <div>
                     <Switch>
+
+                    <PrivateRoute
+                         
+                         
+                         isAuthenticated={!!token}
+                         path="/home" 
+                        component={HomeRoute}
+                        />
+                        {/*
+
                         <PrivateRoute
                          exact
                          isAuthenticated={!!token}
@@ -42,7 +53,7 @@ export const AppRouter = () => {
                         path="/projects" 
                         component={Projects}
                         />
-
+                        */}
                     
             
                         <Route 
