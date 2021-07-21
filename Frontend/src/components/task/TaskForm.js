@@ -1,6 +1,8 @@
 import React from "react";
 import { useForm } from "../../hooks/useForm";
 import { v4 as uuidv4 } from "uuid";
+import { getAll } from "../../actions/base";
+import { ListMembers } from "./ListMembers";
 
 export const TaskForm = () => {
   const [
@@ -17,8 +19,8 @@ export const TaskForm = () => {
     difficulty: "",
     importance: "",
     urgency: "",
-    tags: [],
-    userId: [],
+    tags: [""],
+    userId: [""],
     sprint: "",
     team: "",
   });
@@ -39,8 +41,18 @@ export const TaskForm = () => {
   const handleCreateTask = (event) => {
     event.preventDefault();
     console.log(formValues);
-    // TODO: enviar datos al backend
+    // reset()
   };
+
+  const handleAddMember = (event) => {
+    handleAddArray({ inputs: "", type: "userId" });
+  };
+
+  const handleAddTag = (event) => {
+    handleAddArray({ inputs: "", type: "tags" });
+  };
+
+  // const prueba = getAll('http://localhost:3001/api/users');
 
   const teams = ["Tback", "Tfront"];
   const members = ["Andres", "Cristian", "Sergio"];
@@ -56,6 +68,7 @@ export const TaskForm = () => {
               <li className="list-group-item">
                 <h2 className="card-title">Create a new task</h2>
               </li>
+
               <li className="list-group-item">
                 <div className="row">
                   <div className="col-6">
@@ -151,35 +164,39 @@ export const TaskForm = () => {
                     <label htmlFor="members" className="form-label">
                       Select team:
                     </label>
-                    <select
-                      name="team"
+                    <input
+                      className="form-control"
+                      name="sprint"
                       onChange={handleInputChange}
-                      className="form-select"
-                    >
+                      list="listTeam"
+                      placeholder="Member..."
+                    ></input>
+                    <datalist id="listTeam">
                       {teams.map((team, i) => (
                         <option key={uuidv4()} value={team}>
                           {team}
                         </option>
                       ))}
-                    </select>
+                    </datalist>
                   </div>
 
                   <div className="col-6">
                     <label htmlFor="members" className="form-label">
                       Members:
                     </label>
-                    <select
-                      name="userId"
-                      onChange={handleInputChange}
-                      className="form-select"
+                    <ListMembers
+                      handle={handleInputGroupChange}
+                      value={userId}
+                      data={members}
+                      key={uuidv4()}
+                      type="userId"
+                    />
+                    <button
+                      onClick={handleAddMember}
+                      className="btn btn-primary"
                     >
-                      {members.map((member, i) => (
-                        <option key={uuidv4()} value={member}>
-                          {member}
-                        </option>
-                      ))}
-                    </select>
-                    <button className="btn btn-primary">Add member</button>
+                      Add member
+                    </button>
                   </div>
                 </div>
               </li>
@@ -190,34 +207,38 @@ export const TaskForm = () => {
                     <label htmlFor="sprint" className="form-label">
                       Sprint:
                     </label>
-                    <select
+                    <input
+                      className="form-control"
                       name="sprint"
                       onChange={handleInputChange}
-                      className="form-select"
-                    >
+                      list="listSprints"
+                      placeholder="Member..."
+                    ></input>
+                    <datalist id="listSprints">
                       {sprints.map((sprint, i) => (
                         <option key={uuidv4()} value={sprint}>
                           {sprint}
                         </option>
                       ))}
-                    </select>
+                    </datalist>
                   </div>
                   <div className="col-6">
                     <label htmlFor="tags" className="form-label">
                       Tags:
                     </label>
-                    <select
-                      name="tags"
-                      onChange={handleInputChange}
-                      className="form-select"
+                    <ListMembers
+                      handle={handleInputGroupChange}
+                      value={tags}
+                      data={etiquetas}
+                      key={uuidv4()}
+                      type="tags"
+                    />
+                    <button
+                      onClick={handleAddTag}
+                      className="btn btn-primary"
                     >
-                      {etiquetas.map((etiqueta, i) => (
-                        <option key={uuidv4()} value={etiqueta}>
-                          {etiqueta}
-                        </option>
-                      ))}
-                    </select>
-                    <button className="btn btn-primary" onClick="">Add tag</button>
+                      Add tag
+                    </button>
                   </div>
                 </div>
               </li>
