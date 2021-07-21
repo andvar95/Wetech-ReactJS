@@ -11,10 +11,11 @@ const keys = {
 export const getAll = (endpoint) =>{
     return async(dispatch,getState) =>{
         const res = await fetchConToken(endpoint,{},'GET')
-        const content = await res.json()
+        console.log("Rest",res)
+        const content = await res.json();
         const {items} = getState();
        
-        console.log(content)
+        console.log("CONTENT",content)
         dispatch({type:types.getAll,payload:content.result,currentState:items,field:endpoint})
 
         
@@ -44,7 +45,7 @@ export const update = (endpoint,body)=>{
 
 export const remove = (endpoint,body)=>{
     return async(dispatch,getState) =>{
-        const res = await fetchConToken(endpoint,body,'DELETE');
+        const res = await fetchConToken(endpoint,{},'DELETE');
         const content = await res.json();
         const {items} = getState();
         dispatch(getAll(endpoint))

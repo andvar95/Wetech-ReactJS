@@ -20,34 +20,29 @@ export const fetchSinToken = (endpoint,data,method = 'GET')=>{
 }
 
 
-export const fetchConToken = (endpoint,data,method = 'GET')=>{
-
+export const fetchConToken = (endpoint,data,method)=>{
+    console.log("TYPE PEITTION",method);
     const url = `${urlBase}${endpoint}`;
    
-    return fetch(url+'?project=60ea1805d479c55a9d7933f9',
-        {method,
+    let project = localStorage.getItem("currentProject");
+    if(method === 'GET' || method === 'DELETE'){
+        return fetch(url+"?project="+project,
+            {method,
+                headers:{
+                    'Content-type':'application/json',
+                    'Authorization':'Bearer '+localStorage.getItem('token')
+                }})
+    }
+    else{
+        return fetch(url+"?project="+project,{
+            method,
             headers:{
                 'Content-type':'application/json',
                 'Authorization':'Bearer '+localStorage.getItem('token')
-            }})
-    // if(method === 'GET'){
-    //     return fetch(url,
-    //         {method,
-    //             headers:{
-    //                 'Content-type':'application/json',
-    //                 'Authorization':'Bearer '+localStorage.getItem('token')
-    //             }})
-    // }
-    // else{
-    //     return fetch(url,{
-    //         method,
-    //         headers:{
-    //             'Content-type':'application/json',
-    //             'Authorization':'Bearer '+localStorage.getItem('token')
-    //         },
-    //         body:JSON.stringify(data)
-    //     })
-    // }
+            },
+            body:JSON.stringify(data)
+        })
+    }
     
 }
 
