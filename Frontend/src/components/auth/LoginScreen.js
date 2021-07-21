@@ -21,7 +21,7 @@ console.log(history);
 
   const handleLogin = (event) =>{
     event.preventDefault();
-    // history.replace('/');
+    history.replace('/projects');
     dispatch(startLogin(email,password))
     
   

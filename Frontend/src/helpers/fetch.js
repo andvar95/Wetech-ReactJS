@@ -25,6 +25,7 @@ export const fetchConToken = (endpoint,data,method)=>{
     const url = `${urlBase}${endpoint}`;
    
     let project = localStorage.getItem("currentProject");
+    console.log("url"+ url)
     if(method === 'GET' || method === 'DELETE'){
         return fetch(url+"?project="+project,
             {method,

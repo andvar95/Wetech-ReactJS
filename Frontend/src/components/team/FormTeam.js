@@ -1,31 +1,23 @@
 import React, { useEffect } from "react";
 import { useForm } from "../../hooks/useForm";
 import { v4 as uuidv4 } from "uuid";
-import { create, getAll } from "../../actions/base";
+import { create, getAll, update } from "../../actions/base";
 
 import { useDispatch, useSelector } from "react-redux";
 
-export const FormTeam = ({
-  onClose = (modal) => modal,
-  team = {
-    name: "",
-    description: "",
-    project: localStorage.getItem("currentProject"),
-    members: [localStorage.getItem("user")],
-  },
-}) => {
+export const FormTeam = ({ onClose = (modal) => modal, team }) => {
+  let itemTeam = { ...team };
   const dispatch = useDispatch();
 
-  const { items } = useSelector((state) => state);
-  console.log("TEAM FOR EDIT", team.name);
-
-  const nx = String(team.name) || "hola mundo";
+  const { items } = useSelector(
+    (state) => state,
+    () => {}
+  );
 
   useEffect(() => {
     dispatch(getAll("users"));
   }, [dispatch]);
 
-  console.log("TEMANAME", team.name);
   const [
     formValues,
     handleInputChange,
@@ -33,23 +25,30 @@ export const FormTeam = ({
     handleAddArray,
     handleInputGroupChange,
     handleRemoveArray,
-  ] = useForm({
-    name: nx,
-    description: team.description,
-    members: team.members,
-    project: team.project,
-  });
-
+    setValues,
+  ] = useForm(itemTeam);
+  useEffect(() => {
+    setValues({
+      name: team.name,
+      description: team.description,
+      members: team.members,
+      project: team.project,
+    });
+  }, [team]);
   const { name, description, members } = formValues;
 
   const handleCreateTeam = (event) => {
     event.preventDefault();
-    dispatch(create("team", formValues));
+    if (team._id) {
+      //edit
+      dispatch(update(`team/${team._id}`, formValues));
+    } else {
+      dispatch(create("team", formValues));
+    }
     reset();
   };
   const handleAddMember = (event) => {
     event.preventDefault();
-
     console.log(event, "NUEVO");
     handleAddArray({ inputs: "", type: "members" });
   };
@@ -132,7 +131,6 @@ export const FormTeam = ({
 
         <button
           className="btn btn-primary btn-block"
-          type="submit"
           onClick={handleCreateTeam}
         >
           Create Team

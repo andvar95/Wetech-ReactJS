@@ -8,8 +8,13 @@ export const Teams = () => {
 
   const dispatch = useDispatch()
 
-    const {items} = useSelector(state=>state)
-   const [teamSelect, SetTeamSelect] = useState(undefined);
+    const {items} = useSelector(state=>state,()=>{})
+   const [teamSelect, SetTeamSelect] = useState({
+    name: "",
+    description: "",
+    project: localStorage.getItem("currentProject"),
+    members: [localStorage.getItem("user")],
+  });
   
     useEffect(()=>{
         dispatch(getAll('team'))
@@ -17,18 +22,29 @@ export const Teams = () => {
 
     
   const [modal, setModal] = useState(false);
-console.log("items team",items);
-  const handleCloseModal = () => {
 
-  };
-//TODO: MAKE EDITABLE AND REMOVE
 
-  const handleOpenModal = () => {
+  const handleCreate = () => {
     setModal(true);
+    SetTeamSelect({
+      name: "",
+      description: "",
+      project: localStorage.getItem("currentProject"),
+      members: [localStorage.getItem("user")],
+    
+    
+    });
   };
   const handleEdit = (team)=>{
-    SetTeamSelect(team);
-    console.log("TEAMS",team);
+    
+    SetTeamSelect({
+      _id:team._id,
+      name:team.name,
+      description:team.description,
+      project:team.project,
+      members : team.members.map(member=> member._id)});
+      
+      console.log('team selected',teamSelect);
     setModal(true);
   }
   const handleDelete = (id) => {
@@ -53,7 +69,7 @@ console.log("items team",items);
         <div className="col-md-4">
           <button
             className="btn btn-primary"
-            onClick={handleOpenModal}            
+            onClick={()=>{handleCreate()}}            
           >
             <i className="fas fa-plus-circle"></i>
           </button>
