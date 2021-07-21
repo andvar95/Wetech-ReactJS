@@ -8,11 +8,17 @@ import {types} from "../types/types";
 export const getAll = (endpoint) =>{
     return async(dispatch,getState) =>{
         const res = await fetchConToken(endpoint,{},'GET')
-        const content = await res.json()
+        console.log("Rest",res)
+        const content = await res.json();
         const {items} = getState();
        
+<<<<<<< HEAD
         console.log(content)
         await dispatch({type:types.getAll,payload:content.result,currentState:items,field:endpoint})
+=======
+        console.log("CONTENT",content)
+        dispatch({type:types.getAll,payload:content.result,currentState:items,field:endpoint})
+>>>>>>> master
 
         
     }
@@ -21,6 +27,7 @@ export const getAll = (endpoint) =>{
 export const create = (endpoint,body)=>{
     return async(dispatch,getState) =>{
         const res = await fetchConToken(endpoint,body,'POST');
+        console.log("RESPUESTA",res);
         const content = await res.json();
 
         const {items} = getState();
@@ -46,9 +53,8 @@ export const update = (endpoint,body)=>{
 
 export const remove = (endpoint,body)=>{
     return async(dispatch,getState) =>{
-        const res = await fetchConToken(endpoint,body,'DELETE');
+        const res = await fetchConToken(endpoint,{},'DELETE');
         const content = await res.json();
-
         const {items} = getState();
         //dispatch(getAll(endpoint))
         dispatch({type:types.delete,payload:content.result,currentState:items,field:endpoint})

@@ -1,101 +1,145 @@
-import React from 'react'
-import {useForm} from "../../hooks/useForm";
-import {v4 as uuidv4} from 'uuid';
-export const  FormTeam =({onClose=(modal)=>modal}) => {
+import React, { useEffect } from "react";
+import { useForm } from "../../hooks/useForm";
+import { v4 as uuidv4 } from "uuid";
+import { create, getAll } from "../../actions/base";
 
+import { useDispatch, useSelector } from "react-redux";
 
-    const [formValues, handleInputChange,reset ,handleAddArray,handleInputGroupChange,handleRemoveArray]  = useForm({
-        name:'',
-        description:'',
-        members: []
-      })
+export const FormTeam =  ({ onClose = (modal) => modal ,team={
+  name: "",
+  description: "",
+  project: localStorage.getItem("currentProject"),
+  members: [localStorage.getItem("user")],
+}}) => {
+ 
+  const dispatch = useDispatch();
 
-      const {name,description,members} = formValues;
-
-      const handleCreateTeam = (event) =>{
-        event.preventDefault();
-      
-      }
-      const handleAddMember = (event) =>{
-        console.log(event,'NUEVO');
-        handleAddArray(        
-          {inputs:'',type:'members'}
-        );
-      }
-    console.log('me estoy redijuando :(');
+  const { items } = useSelector((state) => state);
+  console.log("TEAM FOR EDIT",team.name);
   
-    return (
-     
-            <div className="form__container">
-               
-                <form className="form__content" onSubmit={handleCreateTeam}>
-                <h3 className="auth__title mb-5">TEAMS</h3>
-                    <input 
-                    type="text" 
-                    placeholder="name" 
-                    name="name"
-                    className="auth__input"
-                    autoComplete ="off"
-                    value={name}
-                    onChange={handleInputChange}
-                    />
-                    <input type="text" 
-                    placeholder="description" 
-                    name="description" 
-                    className="auth__input"
-                    value={description}
-                    onChange={handleInputChange}
-                    />
-                    {
-                      members.map((member,i) =>(
-                        < div    key={uuidv4()}>
-                        <label>
-                          Member {i}</label>
-                        <input
-                    
-                        type="text" 
-                        placeholder="members" 
-                        name={i} 
-                        className="auth__input"
-                        value={members[i]}
-                        onChange={(e)=>{handleInputGroupChange({target : e,type:"members"})}}
-                        />
-                            <button
-            className="btn btn-danger btn-sm"
-            onClick={()=> handleRemoveArray({idx:i,type:"members"})}            
-          >
-            <i className="fas fa-trash"></i>
-          </button>
-</div>
-                      ))
+let mem = team.members.map((member) => {
+  return member._id;
 
+});
+console.log("mem",mem)
+  useEffect(() => {
+    dispatch(getAll("users"));
+  }, [dispatch]);
+  console.log("TEMANAME",team.name)
+  const [
+    formValues,
+    handleInputChange,
+    reset,
+    handleAddArray,
+    handleInputGroupChange,
+    handleRemoveArray,
+  ] = useForm({
+    name:team.name,
+    description:team.description,
+    members:team.members,
+    project:team.project,    
+  }
+    );
 
-                    }
+  const { name, description, members } = formValues;
 
-          <button
-            className="btn btn-primary"
-                     onClick={handleAddMember}
-          >
-            Add member  <i className="fas fa-plus-circle"></i>
-          </button>
+  const handleCreateTeam = (event) => {
+    event.preventDefault();
+    dispatch(create("team", formValues));
+    reset();
+  };
+  const handleAddMember = (event) => {
+    event.preventDefault();
 
+    console.log(event, "NUEVO");
+    handleAddArray({ inputs: "", type: "members" });
+  };
 
-                    <button 
-                    className="btn btn-primary btn-block" 
-                    type="submit">Create Team</button>
+  return (
+    <div className="form__container">
+      <form className="form__content">
+        <h3 className="auth__title mb-5">TEAMS</h3>
+        <input
+          type="text"
+          placeholder="name"
+          name="name"
+          className="auth__input"
+          autoComplete="off"
+          value={name}
+          onChange={handleInputChange}
+        />
+        <input
+          type="text"
+          placeholder="description"
+          name="description"
+          className="auth__input"
+          value={description}
+          onChange={handleInputChange}
+        />
 
-            
-                    
-                </form>
+        {members.map((member, i) => (
+          <div key={uuidv4()}>
+            <select name="cars" id="cars" value={members[i]} name={i} onChange={(e)=>handleInputGroupChange({ target:e ,type:"members"})}>
+              {items.users &&
+                items.users.map((user) => (
+                  <option key={user._id} value={user._id}>
+                    {user.name}
+                  </option>
+                ))}
+            </select>
 
-                <div className="modal__close" onClick={()=>onClose(false)}>
-                <i className="fas fa-times-circle fa-2x"></i>
-            </div>
-            </div>
+            <button
+              className="btn btn-danger btn-sm"
+              onClick={(e) => {
+                e.preventDefault();
+                handleRemoveArray({ idx: i, type: "members" });
+              }}
+            >
+              <i className="fas fa-trash"></i>
+            </button>
+          </div>
+          // <div key={uuidv4()}>
+          //   <label style={{color: 'black'}}>Member {i}</label>
+          //   <input
+          //     type="text"
+          //     placeholder="members"
+          //     name={i}
+          //     className="auth__input"
+          //     value={members[i]}
+          //     onChange={(e) => {
+          //       handleInputGroupChange({ target: e, type: "members" });
+          //     }}
+          //   />
+          //   <button
+          //     className="btn btn-danger btn-sm"
+          //     onClick={() => handleRemoveArray({ idx: i, type: "members" })}
+          //   >
+          //     <i className="fas fa-trash"></i>
+          //   </button>
+          // </div>
+        ))}
 
+        <button className="btn btn-primary" onClick={handleAddMember}>
+          Add member <i className="fas fa-plus-circle"></i>
+        </button>
 
+        <button
+          className="btn btn-primary btn-block"
+          type="submit"
+          onClick={handleCreateTeam}
+        >
+          Create Team
+        </button>
+      </form>
 
-
-      
-    )
-}
+      <div
+        className="modal__close"
+        onClick={() => {
+          onClose(false);
+        }}
+      >
+        <i className="fas fa-times-circle fa-2x"></i>
+      </div>
+    </div>
+  );
+};

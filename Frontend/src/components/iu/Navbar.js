@@ -16,7 +16,7 @@ export const Navbar = () => {
     return (
         <>
   
-  <nav className="navbar navbar-dark bg-dark" aria-label="Second navbar example">
+  <nav className="navbar navbar-dark bg-dark navbar" aria-label="Second navbar example">
     <div className="container-fluid">
         <div>
         <button className="navbar-toggler" onClick={handleSidebar}>

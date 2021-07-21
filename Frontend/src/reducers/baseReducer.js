@@ -1,5 +1,4 @@
 import {types} from "../types/types";
-import {useSelector} from "react-redux"
 
 
 

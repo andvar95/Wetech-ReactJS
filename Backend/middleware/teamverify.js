@@ -24,7 +24,7 @@ const teamVerify = (...role) => {
             console.log(roleDB);
 
             req.params.RoleProject = roleDB.name;
-
+console.log("team verify",req.params)
             if (!role.includes(roleDB.name))
                 return res.status(400).send("You need be " + role);
 
