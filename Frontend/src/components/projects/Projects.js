@@ -1,16 +1,21 @@
 import React,{useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import { getAll, create} from "../../actions/base";
+import { getAll, create,update,remove} from "../../actions/base";
 
 export const Projects = () => {
 
     const dispatch = useDispatch()
 
-    const {items} = useSelector(state=>state)
+    const {items} = useSelector(state=>state,()=>{})
+
+    const handlePueba =() =>{
+        dispatch(remove('project'),{name:"hoa"})
+    }
    
   
     useEffect(()=>{
         dispatch(getAll('project'))
+   
 
         
 
@@ -21,6 +26,7 @@ export const Projects = () => {
 
     return (
         <>
+        <button onClick={handlePueba}>CLock</button>
         {items.project && <div className="wrap-content">
 
             

@@ -2,10 +2,7 @@ import {fetchConToken} from "../helpers/fetch";
 import {types} from "../types/types";
 
 
-const keys = {
-    project:'projects',
-    users:'result'
-}
+
 
 
 export const getAll = (endpoint) =>{
@@ -15,7 +12,7 @@ export const getAll = (endpoint) =>{
         const {items} = getState();
        
         console.log(content)
-        dispatch({type:types.getAll,payload:content.result,currentState:items,field:endpoint})
+        await dispatch({type:types.getAll,payload:content.result,currentState:items,field:endpoint})
 
         
     }
@@ -26,10 +23,15 @@ export const create = (endpoint,body)=>{
         const res = await fetchConToken(endpoint,body,'POST');
         const content = await res.json();
 
-        const {items} = getState(endpoint);
-        dispatch(getAll(endpoint))
+        const {items} = getState();
+        console.log(getState())
+        //dispatch(getAll(endpoint))
+        dispatch({type:types.create,payload:content.result,currentState:items,field:endpoint})
+
     }
 }
+
+
 
 export const update = (endpoint,body)=>{
     return async(dispatch,getState) =>{
@@ -37,7 +39,8 @@ export const update = (endpoint,body)=>{
         const content = await res.json();
 
         const {items} = getState();
-        dispatch(getAll(endpoint))
+        //dispatch(getAll(endpoint))
+        dispatch({type:types.update,payload:content.result,currentState:items,field:endpoint})
     }
 }
 
@@ -47,6 +50,7 @@ export const remove = (endpoint,body)=>{
         const content = await res.json();
 
         const {items} = getState();
-        dispatch(getAll(endpoint))
+        //dispatch(getAll(endpoint))
+        dispatch({type:types.delete,payload:content.result,currentState:items,field:endpoint})
     }
 }
