@@ -8,7 +8,7 @@ export const Teams = () => {
 
   const dispatch = useDispatch()
 
-    const {items} = useSelector(state=>state)
+    const {items} = useSelector(state=>state,()=>{})
    const [teamSelect, SetTeamSelect] = useState({
     name: "",
     description: "",

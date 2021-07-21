@@ -55,4 +55,5 @@ export const remove = (endpoint,body)=>{
         //dispatch(getAll(endpoint))
         dispatch({type:types.delete,payload:content.result,currentState:items,field:endpoint})
     }
+ 
 }

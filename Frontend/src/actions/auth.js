@@ -12,6 +12,15 @@ export const startLogin = (email,password) =>{
         console.log(body);
     }
 }
+export const logout = ()=>{
+    localStorage.removeItem('token');
+    
+    return (
+     {type:types.authIsAuth,
+    payload:{
+        token:''}}
+)}
+      
 
 export const startRegister = ({name,email,address,phone,password,social}) =>{
 

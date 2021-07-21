@@ -2,17 +2,10 @@ import { useState } from 'react';
 
 
 export const useForm = ( initialState = {} ) => {
-<<<<<<< HEAD
     
     
     const [values, setValues] = useState(initialState);
 console.log("Values",values)
-=======
- 
-    console.log("INITIALSTATE",initialState);
-    const [values, setValues] = useState(initialState);
-   
->>>>>>> cc68e84681b14c13074ef56d71d495f118be5e7d
     const reset = () => {
         setValues( initialState );
     }
