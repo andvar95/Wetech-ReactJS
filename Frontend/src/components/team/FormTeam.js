@@ -10,7 +10,7 @@ export const FormTeam =  ({ onClose = (modal) => modal ,team}) => {
   const dispatch = useDispatch();
 
   const { items } = useSelector((state) => state);
-  console.log("TEAM FOR EDIT",team.name);
+  
 
     useEffect(() => {
     
@@ -44,7 +44,7 @@ export const FormTeam =  ({ onClose = (modal) => modal ,team}) => {
   const handleCreateTeam = (event) => {
     event.preventDefault();
   if(    team._id){//edit
-    dispatch(update("team", formValues));
+    dispatch(update(`team/${team._id}`, formValues));
   }
   else{
     dispatch(create("team", formValues));
