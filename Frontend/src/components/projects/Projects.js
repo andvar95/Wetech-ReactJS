@@ -1,12 +1,16 @@
 import React,{useEffect, } from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import { getAll, } from "../../actions/base";
+import { getAll, create,update,remove} from "../../actions/base";
 
 export const Projects = ({history}) => {
 
     const dispatch = useDispatch()
 
-    const {items} = useSelector(state=>state)
+    const {items} = useSelector(state=>state,()=>{})
+
+    const handlePueba =() =>{
+        dispatch(remove('project'),{name:"hoa"})
+    }
    
   const handleSelectProject = (project)=>{      
       localStorage.setItem("currentProject",project._id);      
@@ -14,6 +18,7 @@ export const Projects = ({history}) => {
   }
     useEffect(()=>{
         dispatch(getAll('project'))
+   
 
     },[dispatch])
 
