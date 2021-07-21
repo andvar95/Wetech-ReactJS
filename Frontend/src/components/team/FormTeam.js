@@ -14,18 +14,14 @@ export const FormTeam =  ({ onClose = (modal) => modal ,team={
  
   const dispatch = useDispatch();
 
+
   const { items } = useSelector((state) => state);
   console.log("TEAM FOR EDIT",team.name);
-  
-let mem = team.members.map((member) => {
-  return member._id;
+  let currentTeam={}
+  if(items.team) currentTeam = items.team.map((te=>te._id === team._id))
 
-});
-console.log("mem",mem)
-  useEffect(() => {
-    dispatch(getAll("users"));
-  }, [dispatch]);
-  console.log("TEMANAME",team.name)
+  console.log(currentTeam)
+  
   const [
     formValues,
     handleInputChange,
@@ -33,6 +29,7 @@ console.log("mem",mem)
     handleAddArray,
     handleInputGroupChange,
     handleRemoveArray,
+    setValues
   ] = useForm({
     name:team.name,
     description:team.description,
@@ -41,6 +38,24 @@ console.log("mem",mem)
   }
     );
 
+  
+
+   
+
+  useEffect(() => {
+
+    dispatch(getAll("users"));
+    setValues(
+      {
+        name:team.name,
+        description:team.description,
+        members:team.members,
+        project:team.project,    
+      }
+    )
+  }, [dispatch]);
+  console.log("TEMANAME",team.name)
+  
   const { name, description, members } = formValues;
 
   const handleCreateTeam = (event) => {

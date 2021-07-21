@@ -2,15 +2,10 @@ import { useState } from 'react';
 
 
 export const useForm = ( initialState = {} ) => {
-    initialState =JSON.parse( JSON.stringify(initialState));
+ 
     console.log("INITIALSTATE",initialState);
-    const [values, setValues] = useState({
-        name:"hola pues",
-        description:initialState.description,
-        members:initialState.members,
-        project:initialState.project, 
-    });
-console.log("Values",values)
+    const [values, setValues] = useState(initialState);
+   
     const reset = () => {
         setValues( initialState );
     }
@@ -64,6 +59,6 @@ console.log("Values",values)
         );
     }
 
-    return [ values, handleInputChange, reset,handleAddArray,handleInputGroupChange,handleRemoveArray ];
+    return [ values, handleInputChange, reset,handleAddArray,handleInputGroupChange,handleRemoveArray, setValues ];
 
 }

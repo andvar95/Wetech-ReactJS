@@ -1,10 +1,6 @@
 import React,{useEffect, } from 'react'
 import {useDispatch, useSelector} from "react-redux";
-<<<<<<< HEAD
 import { getAll, create,update,remove} from "../../actions/base";
-=======
-import { getAll, } from "../../actions/base";
->>>>>>> master
 
 export const Projects = ({history}) => {
 
@@ -28,11 +24,7 @@ export const Projects = ({history}) => {
 
     return (
         <>
-<<<<<<< HEAD
-        <button onClick={handlePueba}>CLock</button>
-=======
         <h1>Projects</h1>
->>>>>>> master
         {items.project && <div className="wrap-content">
 
             
