@@ -1,5 +1,7 @@
 import React from "react";
-import Stacks from "../stack/DnD";
+// import Stacks from "../stack/DnD";
+import Stacks from "../stack/stack";
+
 export const Stack = () => {
   return (
     <div>
