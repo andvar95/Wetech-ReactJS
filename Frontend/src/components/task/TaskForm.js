@@ -187,8 +187,11 @@ export const TaskForm = ({ task, onClose = (modal) => modal }) => {
                       placeholder="Select team"
                       value={team.name}
                     >
+                          <option value="" selected disabled hidden>
+                  Choose here
+                </option>
                       {teams && teams.map((team, i) => (
-                        <option key={uuidv4()} value={team._id}>
+                        <option key={team._id} value={team._id}>
                           {team.name}
                         </option>
                       ))}
@@ -208,8 +211,13 @@ export const TaskForm = ({ task, onClose = (modal) => modal }) => {
                       name="sprint"
                       onChange={handleInputChange}
                     >
-                      {sprints && sprints.map((sprint, i) => (
-                        <option key={uuidv4()} value={sprint._id}>
+                      <option value="" selected disabled hidden>
+                  Choose here
+                </option>
+                      {
+                      
+                      sprints && sprints.map((sprint, i) => (
+                        <option key={sprint._id} value={sprint._id}>
                           {sprint.name}
                         </option>
                       ))}
