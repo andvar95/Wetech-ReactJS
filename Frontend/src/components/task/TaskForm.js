@@ -60,10 +60,8 @@ export const TaskForm = ({ task, onClose = (modal) => modal }) => {
   const handleCreateTask = (event) => {
     event.preventDefault();
     if (task._id) {
-      console.log("edit");
       dispatch(update(`task/${team._id}`, formValues));
     } else {
-      console.log(formValues);
       dispatch(create("task", formValues));
     }
     // reset(); 
@@ -188,7 +186,7 @@ export const TaskForm = ({ task, onClose = (modal) => modal }) => {
                     value={team.name}
                   ></input>
                   <datalist id="listTeam">
-                  {teams.map((team, i) => (
+                  {teams && teams.map((team, i) => (
                     <option key={uuidv4()} value={team._id}>
                     {team.name}
                       </option>
@@ -209,7 +207,7 @@ export const TaskForm = ({ task, onClose = (modal) => modal }) => {
                     value={sprint.name}
                   ></input>
                   <datalist id="listSprints">
-                  {sprints.map((sprint, i) => (
+                  {sprints && sprints.map((sprint, i) => (
                       <option key={uuidv4()} value={sprint._id}>
                         {sprint.name}
                         </option>

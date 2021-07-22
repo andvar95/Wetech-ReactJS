@@ -50,7 +50,6 @@ export const FormTeam = ({ onClose = (modal) => modal, team }) => {
   };
   const handleAddMember = (event) => {
     event.preventDefault();
-    console.log(event, "NUEVO");
     handleAddArray({ inputs: "", type: "members" });
   };
 

@@ -53,7 +53,6 @@ export const FormProjects = ({ onClose = (modal) => modal ,project}) => {
   };
   const handleAddMember = (event) => {
     event.preventDefault();
-    console.log(event, "NUEVO");
     handleAddArray({ inputs: "", type: "members" });
   };
 

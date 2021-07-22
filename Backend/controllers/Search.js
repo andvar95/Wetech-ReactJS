@@ -11,7 +11,6 @@ class SearchController {
     async search(req, res, populatedField) {
         const [mean] = Object.keys(req.query);
         let result = "No found";
-        console.log('MEAN', mean);
         switch (mean) {
             case 'all':
                 let arrayPromises = [];

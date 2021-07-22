@@ -15,9 +15,9 @@ export const SideBarBoard = () => {
           <li className="mb-1">
             <Sprint />
           </li>
-          {/* <li className="mb-1">
+          <li className="mb-1">
             <Tasks />
-          </li> */}
+          </li>
         </ul>
 
         <hr />

@@ -10,7 +10,6 @@ export const Navbar = () => {
 
   const dispatch = useDispatch();
   const handleSidebar = () => {
-    console.log("entreo");
     setSidebar((state) => !state);
   };
   const handleLogout = () => {

@@ -10,7 +10,6 @@ export const LoginScreen = ({history}) => {
   const dispatch = useDispatch()
 
 
-console.log(history);
   const [formValues, handleInputChange ]  = useForm({
     email:'varelo@gmail.com',
     password:'1234'

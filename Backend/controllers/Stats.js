@@ -13,10 +13,8 @@ class StatsController extends BaseController {
 
     async getTeam(req, res, id) {
 
-        console.log(id)
+        
         const team = await Team.findOne({ _id: id })
-        console.log("as")
-        console.log(team)
 
         return team.members
 
@@ -25,7 +23,6 @@ class StatsController extends BaseController {
     async finishTask(req, res) {
         try {
 
-            console.log(req.body)
             const results = await this.service.finishTask(req.params.id);
             const taskFinished = await this.service.update(req.params.id, results);
 

@@ -12,7 +12,6 @@ export const startLogin = (email,password) =>{
     }
         dispatch(checkAuth())
 
-        console.log(body);
     }
 }
 export const logout = ()=>{
@@ -28,14 +27,11 @@ export const logout = ()=>{
 export const startRegister = ({name,email,address,phone,password,social}) =>{
 
     return async()=>{
-        console.log({name,email,address,phone,password,social});
         const res = await fetchSinToken('auth/register',{name,email,address,phone,password,social},'POST')
         const body = await res.json()
-        console.log(res)
 
         if(body) localStorage.setItem('token',body.token)
 
-        console.log(body);
 
     }
 

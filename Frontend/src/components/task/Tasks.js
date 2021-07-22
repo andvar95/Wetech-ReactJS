@@ -10,6 +10,12 @@ export const Tasks = () => {
   useEffect(() => {
     dispatch(getAll("task"));
   }, [dispatch]);
+  useEffect(() => {
+    dispatch(getAll("sprint"));
+  }, [dispatch]);
+  useEffect(() => {
+    dispatch(getAll("teams"));
+  }, [dispatch]);
 
   const [taskSelect, SetTaskSelect] = useState({
     name: "",
@@ -57,7 +63,6 @@ export const Tasks = () => {
       team: task.team,
     });
       
-    console.log('task selected',taskSelect);
     setModal(true);
   }
   
