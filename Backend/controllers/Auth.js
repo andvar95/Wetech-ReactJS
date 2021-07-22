@@ -21,7 +21,7 @@ class AuthController {
                 );
                 const token = await this.service.getTokenS(user);
                 // user.generateJWT();
-                res.status(200).send({ token });
+                res.status(200).send({ token,user:user._id });
             } catch (error) {
                 return res.status(401).json({ message: error.message });
             }

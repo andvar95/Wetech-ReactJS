@@ -1,25 +1,33 @@
-import React ,{useEffect, useState} from 'react'
-import {BrowserRouter as Router, Switch, Route,Link, Redirect} from "react-router-dom";
-import {AuthRouter} from "./AuthRouter"
-import {useDispatch, useSelector} from "react-redux";
-import { checkAuth } from '../actions/auth';
-import {Navbar} from "../components/iu/Navbar"
-import {PrivateRoute} from "./PrivateRoute";
-import { PublicRoute} from "./PublicRoute"; 
-import {HomeRoute} from "./HomeRoute";
-import {Board} from "../components/board/Board";
-import {Projects} from "../components/projects/Projects";
+import React, { useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import { AuthRouter } from "./AuthRouter";
+import { useDispatch, useSelector } from "react-redux";
+import { checkAuth } from "../actions/auth";
+
+import { PrivateRoute } from "./PrivateRoute";
+
+import { Board } from "../components/board/Board";
+import { Projects } from "../components/projects/Projects";
+import { HomeRoute } from "./HomeRoute";
+import { Tasks } from "../components/task/Tasks";
 
 export const AppRouter = () => {
 
     const dispatch = useDispatch()
-    const {token} = useSelector(state=>state.auth)
+    const {token,checking} =  useSelector(state=>state.auth);
 
-    
   
+   console.log(token)
     useEffect(()=>{
         dispatch(checkAuth())
     },[dispatch])
+
+    if(checking) return(<><div>Espere</div></>)
 
 
     return (
@@ -29,37 +37,42 @@ export const AppRouter = () => {
 
                 <div>
                     <Switch>
-                        <Route
+
+                    <PrivateRoute
+                         
+                         
+                         isAuthenticated={!!token}
+                         path="/home" 
+                        component={HomeRoute}
+                        />
+                        {/*
+
+                        <PrivateRoute
                          exact
                          isAuthenticated={!!token}
                          path="/" 
                         component={Board}
                         />
 
-                    <Route
+                    <PrivateRoute
                         exact
                         isAuthenticated={!!token}
                         path="/projects" 
                         component={Projects}
                         />
+                        */}
 
-                    
-            
-                        <Route 
-                            
-                            // isAuthenticated={!!token}
-                            path="/auth" 
-                            component={AuthRouter}
-                            />
+          <Route
+            // isAuthenticated={!!token}
+            path="/auth"
+            component={AuthRouter}
+          />
 
-                        <Redirect to="/auth/login" />
-                    </Switch>
+          <Route apth="/tasks" component={Tasks} />
 
-                </div>
-
-
-            </Router>
-            
-      
-    )
-}
+          <Redirect to="/auth/login" />
+        </Switch>
+      </div>
+    </Router>
+  );
+};

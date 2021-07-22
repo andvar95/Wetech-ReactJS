@@ -2,17 +2,15 @@ import React from 'react';
 import validator from 'validator';
 import { Link } from "react-router-dom";
 import {useForm} from "../../hooks/useForm";
-import { useDispatch,useSelector} from "react-redux";
-//import { setError,removeError} from "../../actions/ui"
+import { useDispatch,} from "react-redux";
 import {startRegister} from "../../actions/auth"
 import templateSocial from "../../helpers/templateSocial";
 
 export const RegisterScreen = () => {
 
   const dispatch = useDispatch(); //dispatch actions
-  console.log(templateSocial)
+  
 
-  //const {msgError} = useSelector(state=>state.ui)  //get redux state in every part  
 
   const [formValues, handleInputChange ]  = useForm({
     name:'andres',

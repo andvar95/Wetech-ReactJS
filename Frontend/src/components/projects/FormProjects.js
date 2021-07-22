@@ -1,52 +1,55 @@
+import { create, getAll,update } from "../../actions/base";
 import React, { useEffect } from "react";
 import { useForm } from "../../hooks/useForm";
 import { v4 as uuidv4 } from "uuid";
-import { create, getAll, update } from "../../actions/base";
 import { useDispatch, useSelector } from "react-redux";
 
-export const FormTeam = ({ onClose = (modal) => modal, team }) => {
-  let itemTeam = { ...team };
-  const dispatch = useDispatch();
+export const FormProjects = ({ onClose = (modal) => modal ,project}) => {
+    let itemProject = {...project};
 
-  const { items } = useSelector(
-    (state) => state,
-    () => {}
-  );
+    const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getAll("users"));
-  }, [dispatch]);
 
-  const [
-    formValues,
-    handleInputChange,
-    reset,
-    handleAddArray,
-    handleInputGroupChange,
-    handleRemoveArray,
-    setValues,
-  ] = useForm(itemTeam);
+    const { items } = useSelector(state=>state);
+    const [
+        formValues,
+        handleInputChange,
+        reset,
+        handleAddArray,
+        handleInputGroupChange,
+        handleRemoveArray,
+        setValues
+      ] = useForm(
+        itemProject
+        );
 
-  useEffect(() => {
-    setValues({
-      name: team.name,
-      description: team.description,
-      members: team.members,
-      project: team.project,
-    });
-  }, [team]);
-  
-  const { name, description, members } = formValues;
 
-  const handleCreateTeam = (event) => {
+    useEffect(() => {
+    
+        dispatch(getAll("users"));
+      }, [dispatch]); 
+
+      useEffect(() => {    
+    
+        setValues({
+          name:project.name,
+          description:project.description,
+          members: project.members,
+        })
+        }, [project]);
+
+        const { name, description, members } = formValues;
+
+  const handleCreateProject = (event) => {
     event.preventDefault();
-    if (team._id) {
-      //edit
-      dispatch(update(`team/${team._id}`, formValues));
-    } else {
-      dispatch(create("team", formValues));
-    }
+  if(    project._id){//edit
+    dispatch(update(`project/${project._id}`, formValues));
+  }
+  else{
+    dispatch(create("project", formValues));
+  }
     reset();
+    onClose(false)
   };
   const handleAddMember = (event) => {
     event.preventDefault();
@@ -54,10 +57,12 @@ export const FormTeam = ({ onClose = (modal) => modal, team }) => {
     handleAddArray({ inputs: "", type: "members" });
   };
 
-  return (
-    <div className="form__container">
+
+    return (
+
+            <div className="form__container">
       <form className="form__content">
-        <h3 className="auth__title mb-5">TEAMS</h3>
+        <h3 className="auth__title mb-5">PROJECT</h3>
         <input
           type="text"
           placeholder="name"
@@ -78,15 +83,7 @@ export const FormTeam = ({ onClose = (modal) => modal, team }) => {
 
         {members.map((member, i) => (
           <div key={uuidv4()}>
-            <select
-              name="cars"
-              id="cars"
-              value={members[i]}
-              name={i}
-              onChange={(e) =>
-                handleInputGroupChange({ target: e, type: "members" })
-              }
-            >
+            <select name="cars" id="cars" value={members[i]} name={i} onChange={(e)=>handleInputGroupChange({ target:e ,type:"members"})}>
               {items.users &&
                 items.users.map((user) => (
                   <option key={user._id} value={user._id}>
@@ -131,10 +128,10 @@ export const FormTeam = ({ onClose = (modal) => modal, team }) => {
         </button>
 
         <button
-          className="btn btn-primary btn-block"
-          onClick={handleCreateTeam}
+          className="btn btn-primary btn-block"          
+          onClick={handleCreateProject}
         >
-          Create Team
+         {project._id?'Edit Project':'Create Project'} 
         </button>
       </form>
 
@@ -147,5 +144,7 @@ export const FormTeam = ({ onClose = (modal) => modal, team }) => {
         <i className="fas fa-times-circle fa-2x"></i>
       </div>
     </div>
-  );
-};
+            
+
+    )
+}

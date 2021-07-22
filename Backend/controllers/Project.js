@@ -78,16 +78,17 @@ class ProjectController extends BaseController {
 
     async create(req, res) {
 
-        const role = await Role.findOne({ name: "PO" });
-        req.body.members = [];
-        req.body.members.push({ userId: req.user._id, Role: role._id });
+        const PO = await Role.findOne({ name: "PO" });
+        const dev = await Role.findOne({ name: "DEV" });
 
-        console.log("asada")
-
+        
+        req.body.members = req.body.members.map(member=>{
+            if (member === req.user._id) return {userId: member, Role: PO._id }
+            else return {userId: member, Role: dev._id }
+        })
+    
         let id_Members = req.body.members.map((member) => member.userId);
-
         try {
-
             req.body.status = [
                 {name:'To-Do',index:1},
                 {name:'In-Progress',index:2},
@@ -111,18 +112,27 @@ class ProjectController extends BaseController {
 
     async update(req, res) {
 
-    console.log(req.body)
-        try {
-            const results = await this.service.update(req.params.id, req.body);
+        const PO = await Role.findOne({ name: "PO" });
+        const dev = await Role.findOne({ name: "DEV" });
 
+        
+        req.body.members = req.body.members.map(member=>{
+            if (member === req.user._id) return {userId: member, Role: PO._id }
+            else return {userId: member, Role: dev._id }
+        })
+
+  
+        try {
+            const result = await this.service.update(req.params.id, req.body);
+            console.log(result)
             if (req.body.members) {
-                let id_Members = results.members.map((member) => member.userId);
+                let id_Members = result.members.map((member) => member.userId);
                 const team = await this.mainTeamUpdate(req, res, id_Members);
 
                 if (!team) return res.status(400).send("Error updating Team");
             }
 
-            return res.status(202).json({ results });
+            return res.status(202).json({ result });
         } catch (error) {
             return res.status(500).json({ message: error.message });
         }

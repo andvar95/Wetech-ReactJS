@@ -6,11 +6,11 @@ import {Navbar} from "../iu/Navbar";
 export const Board = () => {
     return (
         <div>
-             <Navbar />
+          
             <div>
                 <Stack />
             </div>
-
+      
         </div>
     )
 }

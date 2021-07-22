@@ -2,15 +2,10 @@ import { useState } from 'react';
 
 
 export const useForm = ( initialState = {} ) => {
-    initialState =JSON.parse( JSON.stringify(initialState));
-    console.log("INITIALSTATE",initialState);
-    const [values, setValues] = useState({
-        name:"hola pues",
-        description:initialState.description,
-        members:initialState.members,
-        project:initialState.project, 
-    });
-console.log("Values",values)
+    
+    
+    const [values, setValues] = useState(initialState);
+
     const reset = () => {
         setValues( initialState );
     }
@@ -24,9 +19,8 @@ console.log("Values",values)
         });
     }
     const handleInputGroupChange = ({ target ,type}) => {
-        
         const arr = values[type];        
-        let iObj =  target.target.name;        
+        let iObj =  target.target.name;
         setValues({
             ...values,
           [type]: arr.map((el,i)=>
@@ -39,13 +33,11 @@ console.log("Values",values)
         });
     }
     const handleRemoveArray = ({idx,type})=>{
-       console.log(idx);
        const arr = values[type];
         setValues({
             ...values,
           [type]: arr.filter((el,i)=>
             {if (i===Number(idx)){
-                console.log('entro');
                 return false;
             }
             return true;
@@ -64,6 +56,6 @@ console.log("Values",values)
         );
     }
 
-    return [ values, handleInputChange, reset,handleAddArray,handleInputGroupChange,handleRemoveArray ];
+    return [ values, handleInputChange, reset,handleAddArray,handleInputGroupChange,handleRemoveArray,setValues ];
 
 }

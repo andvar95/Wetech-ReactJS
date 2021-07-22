@@ -1,15 +1,20 @@
 import React, { useState } from 'react'
 import {SideBarBoard} from "../board/SideBarBoard";
 import {Link} from 'react-router-dom';
+import {FormCountDown} from '../countdown/FormCountDown';
+import { useDispatch} from "react-redux";
 import './navbar.css';
-
+import { logout } from '../../actions/auth';
 export const Navbar = () => {
-
-    const [sidebar,setSidebar] = useState(false)
- 
+  const [sidebar,setSidebar] = useState(false)
+  
+  const dispatch = useDispatch();
    const handleSidebar = () =>{
        console.log('entreo')
     setSidebar(state=>!state)
+     }
+     const handleLogout = () =>{
+      dispatch(logout());
      }
 
 
@@ -24,7 +29,8 @@ export const Navbar = () => {
       </button>
     <Link className="navbar-brand" to="/">WeTech</Link>
     
-        </div>       
+        </div> 
+        <FormCountDown/>      
 
         <div className="dropdown">
     <a href="#" className="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -36,7 +42,7 @@ export const Navbar = () => {
         <li><a className="dropdown-item" href="#">Settings</a></li>
         <li><a className="dropdown-item" href="#">Profile</a></li>
         <li><hr className="dropdown-divider"/></li>
-        <Link className="dropdown-item" to="/auth">Salir</Link>         
+        <li onClick={handleLogout}><a  className="dropdown-item" href="#">Logout</a></li>
       </ul>        </div>
 
 
