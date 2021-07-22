@@ -49,6 +49,7 @@ export const FormProjects = ({ onClose = (modal) => modal ,project}) => {
     dispatch(create("project", formValues));
   }
     reset();
+    onClose(false)
   };
   const handleAddMember = (event) => {
     event.preventDefault();
