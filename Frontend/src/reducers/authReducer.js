@@ -12,7 +12,7 @@ export const authReducer = (state=initialState, action)=>{
         case types.authIsAuth:
            return {
                ...state,
-               state:false,
+               checking:action.payload.checking,
                token:action.payload.token,
            }
     

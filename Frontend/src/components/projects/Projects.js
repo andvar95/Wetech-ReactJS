@@ -27,6 +27,17 @@ export const Projects = ({history}) => {
         });
     }
    
+    const handleEdit = (project)=>{
+    console.log(project)
+        SetProjectSelect({
+          _id:project._id,
+          name:project.name,
+          description:project.description,
+          members : project.members.map(member=> member.userId._id)});
+          
+         
+        setModal(true);
+      }
   const handleSelectProject = (project)=>{      
       localStorage.setItem("currentProject",project._id);      
       history.push('/home/board');
@@ -49,9 +60,10 @@ export const Projects = ({history}) => {
 
             
             {project.map((project,i)=>(
-                <div key={i} className="project__containerProjects" onClick={()=>handleSelectProject(project)}>
-                    <span><img src={project.img} alt="ProjectPhoto"/> </span> 
-                    <span className="text"> {project.name}</span>
+                <div key={i} className="project__containerProjects" >
+                    <span><img src={project.img} alt="ProjectPhoto"/> </span>
+                    <span onClick={()=>handleEdit(project)} className="text"><i className="fas fa-edit"></i></span>
+                    <span className="text" onClick={()=>handleSelectProject(project)}> {project.name}</span>
                 </div>
             ))
             }

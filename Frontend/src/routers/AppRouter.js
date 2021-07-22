@@ -14,13 +14,15 @@ import { HomeRoute } from './HomeRoute';
 export const AppRouter = () => {
 
     const dispatch = useDispatch()
-    const {token} =          useSelector(state=>state.auth);
+    const {token,checking} =  useSelector(state=>state.auth);
 
   
-  
+   console.log(token)
     useEffect(()=>{
         dispatch(checkAuth())
     },[dispatch])
+
+    if(checking) return(<><div>Espere</div></>)
 
 
     return (

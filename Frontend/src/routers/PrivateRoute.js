@@ -7,7 +7,7 @@ export const PrivateRoute = ({
         isAuthenticated,
     component:Component,
 ...rest}) => {
-
+    console.log(isAuthenticated)
     return (
        <Route {...rest}
            //props-component
