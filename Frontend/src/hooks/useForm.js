@@ -5,7 +5,7 @@ export const useForm = ( initialState = {} ) => {
     
     
     const [values, setValues] = useState(initialState);
-console.log("Values",values)
+
     const reset = () => {
         setValues( initialState );
     }
@@ -19,10 +19,8 @@ console.log("Values",values)
         });
     }
     const handleInputGroupChange = ({ target ,type}) => {
-        console.log(target.target.value);
         const arr = values[type];        
         let iObj =  target.target.name;
-        console.log(iObj);       
         setValues({
             ...values,
           [type]: arr.map((el,i)=>
@@ -35,13 +33,11 @@ console.log("Values",values)
         });
     }
     const handleRemoveArray = ({idx,type})=>{
-       console.log(idx);
        const arr = values[type];
         setValues({
             ...values,
           [type]: arr.filter((el,i)=>
             {if (i===Number(idx)){
-                console.log('entro');
                 return false;
             }
             return true;

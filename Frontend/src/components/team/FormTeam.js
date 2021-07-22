@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useForm } from "../../hooks/useForm";
 import { v4 as uuidv4 } from "uuid";
 import { create, getAll, update } from "../../actions/base";
-
 import { useDispatch, useSelector } from "react-redux";
 
 export const FormTeam = ({ onClose = (modal) => modal, team }) => {

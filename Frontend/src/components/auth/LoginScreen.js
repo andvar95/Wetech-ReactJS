@@ -20,8 +20,9 @@ console.log(history);
 
   const handleLogin = (event) =>{
     event.preventDefault();
-    history.replace('/home/projects');
+    
     dispatch(startLogin(email,password))
+    history.replace('/home/projects');
     
   
   }

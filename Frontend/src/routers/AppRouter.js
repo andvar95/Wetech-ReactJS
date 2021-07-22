@@ -12,23 +12,35 @@ import { PrivateRoute } from "./PrivateRoute";
 import { HomeRoute } from "./HomeRoute";
 
 export const AppRouter = () => {
-  const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth);
 
-  useEffect(() => {
-    dispatch(checkAuth());
-  }, [dispatch]);
+    const dispatch = useDispatch()
+    const {token,checking} =  useSelector(state=>state.auth);
 
-  return (
-    <Router>
-      <div>
-        <Switch>
-          <PrivateRoute
-            isAuthenticated={!!token}
-            path="/home"
-            component={HomeRoute}
-          />
-          {/*
+  
+   console.log(token)
+    useEffect(()=>{
+        dispatch(checkAuth())
+    },[dispatch])
+
+    if(checking) return(<><div>Espere</div></>)
+
+
+    return (
+    
+            <Router>
+            
+
+                <div>
+                    <Switch>
+
+                    <PrivateRoute
+                         
+                         
+                         isAuthenticated={!!token}
+                         path="/home" 
+                        component={HomeRoute}
+                        />
+                        {/*
 
                         <PrivateRoute
                          exact

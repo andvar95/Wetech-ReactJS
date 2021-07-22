@@ -64,12 +64,7 @@ export const TaskForm = ({ task, onClose = (modal) => modal }) => {
       dispatch(update(`task/${team._id}`, formValues));
     } else {
       console.log(formValues);
-      dispatch(
-        create(
-          'task',
-          formValues
-        )
-      );
+      dispatch(create("task", formValues));
     }
     reset();
   };
@@ -79,180 +74,188 @@ export const TaskForm = ({ task, onClose = (modal) => modal }) => {
     handleAddArray({ inputs: "", type: "userId" });
   };
 
-  const teams = items.teams;
+  const teams = items.team;
   const members = items.users;
-  const sprints = items.sprints;
+  const sprints = items.sprint;
 
   return (
-    <form onSubmit={handleCreateTask}>
-      <div className="card w-75">
-        <div className="card-body">
-          <ul className="list-group list-group-flush">
-            <li className="list-group-item">
-              <h2 className="card-title">Create a new task</h2>
-            </li>
+    <div>
+      <form onSubmit={handleCreateTask}>
+        <div className="card w-75">
+          <div className="card-body">
+            <ul className="list-group list-group-flush">
+              <li className="list-group-item">
+                <h2 className="card-title">Create a new task</h2>
+              </li>
 
-            <li className="list-group-item">
-              <div className="row">
-                <div className="col-7">
-                  <label htmlFor="name" className="form-label">
-                    Task name:
+              <li className="list-group-item">
+                <div className="row">
+                  <div className="col-7">
+                    <label htmlFor="name" className="form-label">
+                      Task name:
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="name"
+                      name="name"
+                      autoComplete="off"
+                      value={name}
+                      onChange={handleInputChange}
+                    ></input>
+                  </div>
+                  <div className="col-5">
+                    <label htmlFor="duration" className="form-label">
+                      Deadline:
+                    </label>
+                    <input
+                      type="date"
+                      name="duration"
+                      value={duration}
+                      onChange={handleInputChange}
+                    ></input>
+                  </div>
+                </div>
+              </li>
+
+              <li className="list-group-item">
+                <div className="row">
+                  <label htmlFor="description" className="form-label">
+                    Task description:
                   </label>
                   <input
                     type="text"
-                    placeholder="name"
-                    name="name"
+                    placeholder="description"
+                    name="description"
                     autoComplete="off"
-                    value={name}
+                    value={description}
                     onChange={handleInputChange}
                   ></input>
                 </div>
-                <div className="col-5">
-                  <label htmlFor="duration" className="form-label">
-                    Deadline:
-                  </label>
-                  <input
-                    type="date"
-                    name="duration"
-                    value={duration}
-                    onChange={handleInputChange}
-                  ></input>
-                </div>
-              </div>
-            </li>
+              </li>
 
-            <li className="list-group-item">
-              <div className="row">
-                <label htmlFor="description" className="form-label">
-                  Task description:
-                </label>
-                <input
-                  type="text"
-                  placeholder="description"
-                  name="description"
-                  autoComplete="off"
-                  value={description}
-                  onChange={handleInputChange}
-                ></input>
-              </div>
-            </li>
+              <li className="list-group-item">
+                <div className="row">
+                  <div className="col-4">
+                    <label htmlFor="difficulty" className="form-label">
+                      Task difficulty:
+                    </label>
+                    <input
+                      type="number"
+                      name="difficulty"
+                      value={difficulty}
+                      onChange={handleInputChange}
+                      min="1"
+                      max="5"
+                    ></input>
+                  </div>
+                  <div className="col-4">
+                    <label htmlFor="importance" className="form-label">
+                      Task importance:
+                    </label>
+                    <input
+                      type="number"
+                      name="importance"
+                      value={importance}
+                      onChange={handleInputChange}
+                      min="1"
+                      max="5"
+                    ></input>
+                  </div>
+                  <div className="col-4">
+                    <label htmlFor="urgency" className="form-label">
+                      Task urgency:
+                    </label>
+                    <input
+                      type="number"
+                      name="urgency"
+                      value={urgency}
+                      onChange={handleInputChange}
+                      min="1"
+                      max="5"
+                    ></input>
+                  </div>
+                </div>
+              </li>
 
-            <li className="list-group-item">
-              <div className="row">
-                <div className="col-4">
-                  <label htmlFor="difficulty" className="form-label">
-                    Task difficulty:
-                  </label>
-                  <input
-                    type="number"
-                    name="difficulty"
-                    value={difficulty}
-                    onChange={handleInputChange}
-                    min="1"
-                    max="5"
-                  ></input>
-                </div>
-                <div className="col-4">
-                  <label htmlFor="importance" className="form-label">
-                    Task importance:
-                  </label>
-                  <input
-                    type="number"
-                    name="importance"
-                    value={importance}
-                    onChange={handleInputChange}
-                    min="1"
-                    max="5"
-                  ></input>
-                </div>
-                <div className="col-4">
-                  <label htmlFor="urgency" className="form-label">
-                    Task urgency:
-                  </label>
-                  <input
-                    type="number"
-                    name="urgency"
-                    value={urgency}
-                    onChange={handleInputChange}
-                    min="1"
-                    max="5"
-                  ></input>
-                </div>
-              </div>
-            </li>
-
-            {/* <li className="list-group-item">
+              <li className="list-group-item">
               <div className="row">
                 <div className="col-6">
-                  <label htmlFor="members" className="form-label">
-                    Team:
-                  </label>
-                  <input
+                <label htmlFor="members" className="form-label">
+                Team:
+                </label>
+                <input
                     className="form-control"
                     name="team"
                     onChange={handleInputChange}
                     list="listTeam"
                     placeholder="Select team"
-                    value={team}
+                    value={team.name}
                   ></input>
                   <datalist id="listTeam">
-                    {teams.map((team, i) => (
-                      <option key={uuidv4()} value={team}>
-                        {team}
+                  {teams.map((team, i) => (
+                    <option key={uuidv4()} value={team._id}>
+                    {team.name}
                       </option>
-                    ))}
+                      ))}
                   </datalist>
                 </div>
-
+                
                 <div className="col-6">
                   <label htmlFor="sprint" className="form-label">
-                    Sprint:
+                  Sprint:
                   </label>
                   <input
-                    className="form-control"
+                  className="form-control"
                     name="sprint"
                     onChange={handleInputChange}
                     list="listSprints"
                     placeholder="Select sprint"
-                    value={sprint}
+                    value={sprint.name}
                   ></input>
                   <datalist id="listSprints">
-                    {sprints.map((sprint, i) => (
-                      <option key={uuidv4()} value={sprint}>
-                        {sprint}
-                      </option>
-                    ))}
+                  {sprints.map((sprint, i) => (
+                      <option key={uuidv4()} value={sprint._id}>
+                        {sprint.name}
+                        </option>
+                        ))}
                   </datalist>
-                </div>
-              </div>
-            </li> */}
-
-            <li className="list-group-item">
-              <div className="row">
-                <div className="col-6">
-                  <label htmlFor="members" className="form-label">
-                    Members:
-                  </label>
-                  <ListMembers
-                    handleAdd={handleInputGroupChange}
-                    handleDelete={handleRemoveArray}
-                    value={userId}
-                    data={members}
-                    key={uuidv4()}
-                    type="userId"
-                  />
-                  <button onClick={handleAddMember} className="btn btn-primary">
-                    Add member
-                  </button>
-                </div>
+                  </div>
               </div>
             </li>
-          </ul>
+
+              <li className="list-group-item">
+                <div className="row">
+                  <div className="col-6">
+                    <label htmlFor="members" className="form-label">
+                      Members:
+                    </label>
+                    <ListMembers
+                      handleAdd={handleInputGroupChange}
+                      handleDelete={handleRemoveArray}
+                      value={userId}
+                      data={members}
+                      key={uuidv4()}
+                      type="userId"
+                    />
+                    <button
+                      onClick={handleAddMember}
+                      className="btn btn-primary"
+                    >
+                      Add member
+                    </button>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <button className="btn btn-primary" type="submit">
+            Create task
+          </button>
         </div>
-        <button className="btn btn-primary" type="submit">
-          Create task
-        </button>
+      </form>
+      <div className="modal__close" onClick={() => onClose(false)}>
+        <i className="fas fa-times-circle fa-2x"></i>
       </div>
-    </form>
+    </div>
   );
 };

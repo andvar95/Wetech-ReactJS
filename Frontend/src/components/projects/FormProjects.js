@@ -130,7 +130,7 @@ export const FormProjects = ({ onClose = (modal) => modal ,project}) => {
           className="btn btn-primary btn-block"          
           onClick={handleCreateProject}
         >
-          Create Project
+         {project._id?'Edit Project':'Create Project'} 
         </button>
       </form>
 
