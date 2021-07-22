@@ -5,7 +5,7 @@ import { getAll, remove } from "../../actions/base";
 
 export const Teams = () => {
   const dispatch = useDispatch();
-  const items = useSelector((state) => state.items.team);
+  const items = useSelector((state) => state.items.team,()=>{});
   const [teamSelect, SetTeamSelect] = useState({
     name: "",
     description: "",

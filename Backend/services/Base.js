@@ -31,7 +31,6 @@ class BaseService {
     }
 
     getAll(params, populateField) {
-        console.log(params);
         return this.repository.getAll(params, populateField);
     }
     async getOne(data, populateField) {
@@ -39,7 +38,6 @@ class BaseService {
     }
     async get(id, populateField) {
         const element = await this.repository.findById(id, populateField);
-        console.log("id", id);
         if (!element) {
             const error = new Error("This element does not exist");
             error.status = 404;

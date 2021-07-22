@@ -61,13 +61,12 @@ export const TaskForm = ({ task, onClose = (modal) => modal }) => {
   const handleCreateTask = (event) => {
     event.preventDefault();
     if (task._id) {
-      console.log("edit");
       dispatch(update(`task/${team._id}`, formValues));
     } else {
-      console.log(formValues);
       dispatch(create("task", formValues));
     }
-    // reset();
+    reset(); 
+    onClose(false);
   };
 
   const handleAddMember = (event) => {
@@ -180,7 +179,7 @@ export const TaskForm = ({ task, onClose = (modal) => modal }) => {
                     <label htmlFor="members" className="form-label">
                       Team:
                     </label>
-                    <select
+                 <select
                       className="form-control"
                       name="team"
                       onChange={handleInputChange}
@@ -188,7 +187,7 @@ export const TaskForm = ({ task, onClose = (modal) => modal }) => {
                       placeholder="Select team"
                       value={team.name}
                     >
-                      {teams.map((team, i) => (
+                      {teams && teams.map((team, i) => (
                         <option key={uuidv4()} value={team._id}>
                           {team.name}
                         </option>
@@ -209,7 +208,7 @@ export const TaskForm = ({ task, onClose = (modal) => modal }) => {
                       name="sprint"
                       onChange={handleInputChange}
                     >
-                      {sprints.map((sprint, i) => (
+                      {sprints && sprints.map((sprint, i) => (
                         <option key={uuidv4()} value={sprint._id}>
                           {sprint.name}
                         </option>

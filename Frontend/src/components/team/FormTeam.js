@@ -47,10 +47,10 @@ export const FormTeam = ({ onClose = (modal) => modal, team }) => {
       dispatch(create("team", formValues));
     }
     reset();
+    onClose(false);
   };
   const handleAddMember = (event) => {
     event.preventDefault();
-    console.log(event, "NUEVO");
     handleAddArray({ inputs: "", type: "members" });
   };
 

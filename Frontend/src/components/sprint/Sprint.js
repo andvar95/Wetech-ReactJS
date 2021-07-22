@@ -6,7 +6,7 @@ import { getAll, remove } from "../../actions/base";
 export const Sprint = () => {
 
     const dispatch = useDispatch();
-    const items = useSelector((state) => state.items.sprint);
+    const items = useSelector((state) => state.items.sprint,()=>{});
     const [sprintSelect, SetSprintSelect] = useState({
       name: "",
       description: "",
@@ -25,6 +25,7 @@ export const Sprint = () => {
         description: "",
         project: localStorage.getItem("currentProject"),
       });
+      
     };
   
     const handleEdit = (element) => {

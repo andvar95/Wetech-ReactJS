@@ -17,7 +17,6 @@ class StatsService extends BaseService {
     const today = new Date()
     let dateFinish = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate()
 
-    console.log(dateFinish)
 
     result.time = (today - result.dateInit.getTime()) /(1000 * 3600 * 24);
 

@@ -20,7 +20,6 @@ class BaseController {
 
     async update(req, res) {
         try {
-            console.log('UPLOADING@@@@@@', req.body);
             const result = await this.service.update(req.params.id, req.body);
 
             return res.status(202).json({ result });
@@ -37,10 +36,9 @@ class BaseController {
                 result = await this.service.list(req.query.name, populateField);
             else if (req.query.email)
                 result = await this.service.list(req.query.email, populateField);
-            else if (req.query.type)
+            else if (!req.query.type)
                 result = await this.service.list(req.query.type, false);
             else result = await this.service.getAll({}, populateField);
-
             return res.status(200).json({ result });
         } catch (error) {
             return res.status(500).json({ message: error.message });

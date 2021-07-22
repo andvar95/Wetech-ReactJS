@@ -32,7 +32,6 @@ class TeamController extends BaseController {
           populateField
         );
       }
-console.log("tome pa que lleve",result)
       return res.status(200).json({ result });
     } catch (error) {
       return res.status(500).json({ message: error.message });
