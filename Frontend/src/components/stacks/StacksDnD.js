@@ -69,7 +69,6 @@ export default function Stack() {
     <div className="">
       <DragDropContext
         onDragEnd={(result) => {
-          console.log(result);
         }}
       >
         <div className="stack__containerStacks">

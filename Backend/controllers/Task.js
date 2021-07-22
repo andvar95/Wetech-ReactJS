@@ -75,11 +75,9 @@ class TaskController extends BaseController {
 
     req.body.stats = statId;
     try {
-      console.log("Request task",req.body)
       const result = await this.service.create(req.body);
       return res.status(201).json({ result });
     } catch (error) {
-      console.log('ERROASD',error)
       return res.status(error.status || 500).json({ message: error.message });
     }
   }
@@ -179,8 +177,7 @@ class TaskController extends BaseController {
   }
 
   async update(req, res) {
-    // console.log(req.body.status);
-    // console.log(req.body.historial);
+  
     // if (req.body.status !== req.body.historial[req.body.historial.lenght])
     //   req.body.historial.push(req.body.status);
 

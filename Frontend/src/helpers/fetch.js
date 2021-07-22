@@ -17,11 +17,9 @@ export const fetchSinToken = (endpoint, data, method = "GET") => {
 };
 
 export const fetchConToken = (endpoint, data, method) => {
-  console.log("TYPE PEITTION", method);
   const url = `${urlBase}${endpoint}`;
 
   let project = localStorage.getItem("currentProject");
-  console.log("url" + url);
   if (method === "GET" || method === "DELETE") {
     return fetch(url + "?project=" + project + "&type=All", {
       method,

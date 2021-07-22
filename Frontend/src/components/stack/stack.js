@@ -19,8 +19,6 @@ export default function Stack() {
   }, [dispatch]);
 
   const handleStatus = (event, mytask) => {
-    console.log("task", mytask);
-    console.log("event", event.target.value);
     const data = {};
     data.status = event.target.value;
 

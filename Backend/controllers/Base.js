@@ -39,7 +39,6 @@ class BaseController {
             else if (!req.query.type)
                 result = await this.service.list(req.query.type, false);
             else result = await this.service.getAll({}, populateField);
-            console.log('AQUI ES',result);
             return res.status(200).json({ result });
         } catch (error) {
             return res.status(500).json({ message: error.message });

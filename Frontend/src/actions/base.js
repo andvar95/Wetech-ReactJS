@@ -12,9 +12,7 @@ const getField = (endpoint) => {
 export const getAll = (endpoint) => {
   return async (dispatch, getState) => {
     const res = await fetchConToken(endpoint, {}, "GET");
-    console.log("Rest", res);
     const content = await res.json();
-    console.log("content", content);
     const { items } = getState();
 
     const field = getField(endpoint);
@@ -33,7 +31,6 @@ export const create = (endpoint, body) => {
     const res = await fetchConToken(endpoint, body, "POST");
     const content = await res.json();
     const { items } = getState();
-    console.log(getState());
     const field = getField(endpoint);
     //dispatch(getAll(endpoint))
     dispatch({
@@ -65,9 +62,7 @@ export const update = (endpoint, body) => {
 export const remove = (endpoint, body) => {
   return async (dispatch, getState) => {
     const res = await fetchConToken(endpoint, {}, "DELETE");
-    console.log("RESPUEST DELETE", res);
     const content = await res.json();
-    console.log("COENTNET", content.body);
     const { items } = getState();
     //dispatch(getAll(endpoint))
     const field = getField(endpoint);

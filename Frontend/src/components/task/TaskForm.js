@@ -10,14 +10,15 @@ export const TaskForm = ({ task, onClose = (modal) => modal }) => {
   const itemTask = { ...task };
   const dispatch = useDispatch();
 
-  const { team: teams, users, sprint: sprints } = useSelector(
-    (state) => state.items,
-  );
+  const {
+    team: teams,
+    users,
+    sprint: sprints,
+  } = useSelector((state) => state.items);
 
   useEffect(() => {
     dispatch(getAll("users"));
   }, [dispatch]);
-
 
   const [
     formValues,
@@ -173,50 +174,49 @@ export const TaskForm = ({ task, onClose = (modal) => modal }) => {
               </li>
 
               <li className="list-group-item">
-              <div className="row">
-                <div className="col-6">
-                <label htmlFor="members" className="form-label">
-                Team:
-                </label>
-                <input
-                    className="form-control"
-                    name="team"
-                    onChange={handleInputChange}
-                    list="listTeam"
-                    placeholder="Select team"
-                    value={team.name}
-                  ></input>
-                  <datalist id="listTeam">
-                  {teams && teams.map((team, i) => (
-                    <option key={uuidv4()} value={team._id}>
-                    {team.name}
-                      </option>
-                      ))}
-                  </datalist>
-                </div>
-                
-                <div className="col-6">
-                  <label htmlFor="sprint" className="form-label">
-                  Sprint:
-                  </label>
-                  <input
-                  className="form-control"
-                    name="sprint"
-                    onChange={handleInputChange}
-                    list="listSprints"
-                    placeholder="Select sprint"
-                    value={sprint.name}
-                  ></input>
-                  <datalist id="listSprints">
-                  {sprints && sprints.map((sprint, i) => (
-                      <option key={uuidv4()} value={sprint._id}>
-                        {sprint.name}
+                <div className="row">
+                  <div className="col-6">
+                    <label htmlFor="members" className="form-label">
+                      Team:
+                    </label>
+                 <select
+                      className="form-control"
+                      name="team"
+                      onChange={handleInputChange}
+                      list="listTeam"
+                      placeholder="Select team"
+                      value={team.name}
+                    >
+                      {teams && teams.map((team, i) => (
+                        <option key={uuidv4()} value={team._id}>
+                          {team.name}
                         </option>
-                        ))}
-                  </datalist>
+                      ))}
+                    </select>
                   </div>
-              </div>
-            </li>
+
+                  <div className="col-6">
+                    <label htmlFor="sprint" className="form-label">
+                      Sprint:
+                    </label>
+                    <select
+                      className="form-control"
+                      list="listSprints"
+                      placeholder="Select sprint"
+                      id="listSprints"
+                      value={sprint.name}
+                      name="sprint"
+                      onChange={handleInputChange}
+                    >
+                      {sprints && sprints.map((sprint, i) => (
+                        <option key={uuidv4()} value={sprint._id}>
+                          {sprint.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              </li>
 
               <li className="list-group-item">
                 <div className="row">

@@ -32,7 +32,6 @@ export default function Task({ tasks }) {
 }
 
 function ChangeStateTask(result, setStacks) {
-  console.log(result);
 
   const { source, destination } = result;
   if (!destination) {
