@@ -34,7 +34,7 @@ setMinutes(Number(initialMinute));
 },[initialMinute,initialSeconds])
 return (
     <div>
-       <h1> {minutes}:{seconds < 10 ?  `0${seconds}` : seconds}</h1> 
+       <h1 style={{color: 'white'}}> {minutes}:{seconds < 10 ?  `0${seconds}` : seconds}</h1> 
  
     </div>
 )

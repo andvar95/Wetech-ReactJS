@@ -1,0 +1,52 @@
+.stack__containerStacks {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  min-width: 1225px;
+
+  height: 100vh;
+  padding-top: 2%;
+}
+
+.stack__Stack {
+  width: 18%;
+  min-width: 250px;
+  min-height: 50px;
+  border-radius: 5px;
+
+  background-color: #edf2f7;
+}
+
+.stack__wrapStack {
+  background-color: #dfe6ee;
+  max-height: 500px;
+  border-radius: 5px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.stack__headerTask {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.stack__footerTask {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.task__nameTask h6 {
+  padding-top: 10px;
+  font-weight: bold;
+}
+
+.form-select {
+  width: 75%;
+}
+
+.sts {
+  max-height: 35px;
+}

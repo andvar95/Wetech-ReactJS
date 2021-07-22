@@ -64,7 +64,8 @@ export const TaskForm = ({ task, onClose = (modal) => modal }) => {
     } else {
       dispatch(create("task", formValues));
     }
-    // reset(); 
+    reset(); 
+    onClose(false);
   };
 
   const handleAddMember = (event) => {

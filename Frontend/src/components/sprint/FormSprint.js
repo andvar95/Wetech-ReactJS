@@ -39,6 +39,7 @@ export const FormSprint = ({onClose=(modal)=>modal,sprint}) => {
     } else {
       dispatch(create("sprint", formValues));
     }
+    onClose(false);
     reset();
   };
 

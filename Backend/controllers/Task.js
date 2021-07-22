@@ -1,5 +1,3 @@
-
-
 const BaseController = require("./Base");
 const { Task: Service } = require("../services");
 const Status = require("../models/status");
@@ -28,11 +26,8 @@ class TaskController extends BaseController {
       };
     });
 
-  
-
     results.forEach((task) => {
       Object.keys(output).forEach((out) => {
-
         if (task.status === out) {
           output[out].tasks.push(task);
         }
@@ -184,8 +179,10 @@ class TaskController extends BaseController {
   }
 
   async update(req, res) {
-    if (req.body.status !== req.body.historial[req.body.historial.lenght])
-      req.body.historial.push(req.body.status);
+    // console.log(req.body.status);
+    // console.log(req.body.historial);
+    // if (req.body.status !== req.body.historial[req.body.historial.lenght])
+    //   req.body.historial.push(req.body.status);
 
     try {
       const result = await this.service.update(req.params.id, req.body);

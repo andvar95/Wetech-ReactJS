@@ -8,6 +8,9 @@
 @import "./components/sidebar";
 @import "./components//modal";
 @import "./components/form";
+<<<<<<< HEAD:Frontend/src/styles/styles.scss
+@import "./components/project";
+=======
 @import "./components/stack";
 @import "./components/task";
-@import "./components/project";
+>>>>>>> 8293d763ea17c8e4fcd8f6b6e8bc09e53f43e4fc:src/styles/styles.scss

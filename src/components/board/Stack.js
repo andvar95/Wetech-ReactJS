@@ -1,11 +1,9 @@
 import React from "react";
-// import Stacks from "../stack/DnD";
-import Stacks from "../stack/stack";
-
+import Stacks from "../stacks/StacksDnD";
 export const Stack = () => {
   return (
     <div>
-      <div>
+      <div className="">
         <Stacks />
       </div>
     </div>
