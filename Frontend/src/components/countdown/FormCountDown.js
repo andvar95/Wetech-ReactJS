@@ -18,7 +18,7 @@ const [initialSeconds,setInitialSeconds] = useState(0);
 const [pause,setPause] = useState(true);
 const {minutes,seconds} = formValues;
   const handleStart = (e)=>{
-    console.log(pause);
+    
     e.preventDefault();
     setInitialMinutes(minutes);
     setInitialSeconds(seconds);
