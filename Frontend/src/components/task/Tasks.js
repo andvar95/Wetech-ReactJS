@@ -27,6 +27,7 @@ export const Tasks = () => {
   const [modal, setModal] = useState(false);
 
   const handleCreate = () => {
+    setModal(true);
     SetTaskSelect({
       name: "",
       description: "",
@@ -40,13 +41,32 @@ export const Tasks = () => {
       team: "",
     });
   };
+
+  const handleEdit = (task)=>{
+    SetTaskSelect({
+      _id: task._id,
+      name: task.name, 
+      description: task.description, 
+      duration: task.duration, 
+      difficulty: task.difficulty, 
+      importance: task.importance, 
+      urgency: task.urgency, 
+      tags: task.tags, 
+      userId: task.userId, 
+      sprint: task.sprint, 
+      team: task.team,
+    });
+      
+    console.log('task selected',taskSelect);
+    setModal(true);
+  }
   
   return (
     <>
       <h2>Tasks</h2>
-      <button className="btn btn-primary">Create Task</button>
-      <div>
-        <TaskForm task={taskSelect} />
+      <button onClick={handleCreate} className="btn btn-primary">Create Task</button>
+      <div className={modal ? "modal" : "none"}>
+        <TaskForm task={taskSelect} onClose={(modal) => setModal(modal)}/>
       </div>
     </>
   );

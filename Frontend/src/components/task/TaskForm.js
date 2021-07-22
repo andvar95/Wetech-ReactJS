@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useForm } from "../../hooks/useForm";
 import { v4 as uuidv4 } from "uuid";
-import { create, getAll } from "../../actions/base";
+import { create, getAll, update } from "../../actions/base";
 import { ListMembers } from "./ListMembers";
 
 import { useDispatch, useSelector } from "react-redux";
 
-export const TaskForm = ({task}) => {
+export const TaskForm = ({ task, onClose = (modal) => modal }) => {
   const itemTask = { ...task };
   const dispatch = useDispatch();
 
@@ -61,12 +61,12 @@ export const TaskForm = ({task}) => {
     event.preventDefault();
     if (task._id) {
       console.log("edit");
-      // dispatch(update(`task/${team._id}`, formValues));
+      dispatch(update(`task/${team._id}`, formValues));
     } else {
-      console.log("crear");
+      console.log(formValues);
       dispatch(
         create(
-          `task/?project=${localStorage.getItem("currentProject")}`,
+          'task',
           formValues
         )
       );
@@ -79,17 +79,9 @@ export const TaskForm = ({task}) => {
     handleAddArray({ inputs: "", type: "userId" });
   };
 
-  const handleAddTag = (event) => {
-    event.preventDefault();
-    handleAddArray({ inputs: "", type: "tags" });
-  };
-
-  const teams = ["Tback", "Tfront"];
+  const teams = items.teams;
   const members = items.users;
-  
-  const sprints = ["Sprint 1", "Sprint 2"];
-  const etiquetas = ["Vue", "Angular", "React"];
-  console.log("task: ", task);
+  const sprints = items.sprints;
 
   return (
     <form onSubmit={handleCreateTask}>
@@ -189,7 +181,7 @@ export const TaskForm = ({task}) => {
               </div>
             </li>
 
-            <li className="list-group-item">
+            {/* <li className="list-group-item">
               <div className="row">
                 <div className="col-6">
                   <label htmlFor="members" className="form-label">
@@ -213,27 +205,6 @@ export const TaskForm = ({task}) => {
                 </div>
 
                 <div className="col-6">
-                  <label htmlFor="members" className="form-label">
-                    Members:
-                  </label>
-                  <ListMembers
-                      handleAdd={handleInputGroupChange}
-                      handleDelete={handleRemoveArray}
-                      value={userId}
-                      data={members}
-                      key={uuidv4()}
-                      type="userId"
-                    />
-                  <button onClick={handleAddMember} className="btn btn-primary">
-                    Add member
-                  </button>
-                </div>
-              </div>
-            </li>
-
-            <li className="list-group-item">
-              <div className="row">
-                <div className="col-6">
                   <label htmlFor="sprint" className="form-label">
                     Sprint:
                   </label>
@@ -253,20 +224,25 @@ export const TaskForm = ({task}) => {
                     ))}
                   </datalist>
                 </div>
+              </div>
+            </li> */}
+
+            <li className="list-group-item">
+              <div className="row">
                 <div className="col-6">
-                  <label htmlFor="tags" className="form-label">
-                    Tags:
+                  <label htmlFor="members" className="form-label">
+                    Members:
                   </label>
                   <ListMembers
-                      handleAdd={handleInputGroupChange}
-                      handleDelete={handleRemoveArray}
-                      value={tags}
-                      data={etiquetas}
-                      key={uuidv4()}
-                      type="tags"
-                    />
-                  <button onClick={handleAddTag} className="btn btn-primary">
-                    Add tag
+                    handleAdd={handleInputGroupChange}
+                    handleDelete={handleRemoveArray}
+                    value={userId}
+                    data={members}
+                    key={uuidv4()}
+                    type="userId"
+                  />
+                  <button onClick={handleAddMember} className="btn btn-primary">
+                    Add member
                   </button>
                 </div>
               </div>
