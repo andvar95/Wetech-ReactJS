@@ -8,7 +8,6 @@ class AuthController {
         this.getLoggued = this.getLoggued.bind(this);
     }
     async login(req, res) {
-        console.log(req.body);
         const user = await this.service.getOne({ email: req.body.email });
 
         if (!user) {
@@ -29,7 +28,6 @@ class AuthController {
     }
     async register(req, res) {
 
-        console.log(req.body)
        
         try {
             const response = await this.service.create(req.body);

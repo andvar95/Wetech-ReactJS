@@ -30,7 +30,6 @@ export const Projects = ({history}) => {
     }
    
     const handleEdit = (project)=>{
-    console.log(project)
         SetProjectSelect({
           _id:project._id,
           name:project.name,

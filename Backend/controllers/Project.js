@@ -124,7 +124,6 @@ class ProjectController extends BaseController {
   
         try {
             const result = await this.service.update(req.params.id, req.body);
-            console.log(result)
             if (req.body.members) {
                 let id_Members = result.members.map((member) => member.userId);
                 const team = await this.mainTeamUpdate(req, res, id_Members);

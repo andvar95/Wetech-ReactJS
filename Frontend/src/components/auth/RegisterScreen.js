@@ -33,7 +33,6 @@ export const RegisterScreen = () => {
   
   const handleRegister =(event) =>{
     event.preventDefault();
-      console.log({name,email,address,phone,password,password2,social});
     if(isFormValid()) dispatch(startRegister({name,email,address,phone,password,social}
     ))
     

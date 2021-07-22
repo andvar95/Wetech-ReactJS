@@ -5,12 +5,12 @@ import {FormCountDown} from '../countdown/FormCountDown';
 import { useDispatch} from "react-redux";
 import './navbar.css';
 import { logout } from '../../actions/auth';
+
 export const Navbar = () => {
   const [sidebar, setSidebar] = useState(false);
 
   const dispatch = useDispatch();
   const handleSidebar = () => {
-    console.log("entreo");
     setSidebar((state) => !state);
   };
   const handleLogout = () => {

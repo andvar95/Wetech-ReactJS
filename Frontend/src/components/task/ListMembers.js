@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 export const ListMembers = ({ handleAdd, handleDelete, value, data, type }) => {
   return (
     <>
-      {value.map((v, i) => (
+      {value && value.map((v, i) => (
         <div className="row align-items-start" key={uuidv4()}>
           <div className="col-10">
             <select

@@ -8,9 +8,8 @@ const dbConnection = async () => {
       useCreateIndex: true,
       useUnifiedTopology: true,
     });
-    console.log("Conection with MongoDB: ON");
+    console.log('Connected to the DB');
   } catch (error) {
-    console.log("Error Connecting to MongoDB: ", error);
     process.exit(0);
   }
 };

@@ -29,7 +29,6 @@ let myInterval = setInterval(() => {
       };
 });
 useEffect(() => {
-  console.log('SET');
 setSeconds(Number(initialSeconds));
 setMinutes(Number(initialMinute));
 },[initialMinute,initialSeconds])

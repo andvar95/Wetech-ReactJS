@@ -21,16 +21,13 @@ const teamVerify = (...role) => {
                 return res.status(401).send("You are not a member");
 
             const roleDB = await Role.findById(isMember[0].Role);
-            console.log(roleDB);
 
             req.params.RoleProject = roleDB.name;
-console.log("team verify",req.params)
             if (!role.includes(roleDB.name))
                 return res.status(400).send("You need be " + role);
 
             next();
         } catch (err) {
-            console.log(err);
             res.status(400).send("Error checking role");
         }
     };

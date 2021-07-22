@@ -17,7 +17,6 @@ export const AppRouter = () => {
     const {token,checking} =  useSelector(state=>state.auth);
 
   
-   console.log(token)
     useEffect(()=>{
         dispatch(checkAuth())
     },[dispatch])

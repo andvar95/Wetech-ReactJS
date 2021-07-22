@@ -21,7 +21,7 @@ router.get("/:id",Auth,TeamVerify.teamVerify("TL","DEV","PO"), (req,res)=>contro
 {path:'team'},
 {path:'stats'}]));
 
-router.post("/",Auth, TeamVerify.teamVerify("TL","PO"), controller.create);
+router.post("/",Auth, TeamVerify.teamVerify("TL","PO","DEV"), controller.create);
 router.put("/:id",Auth,TeamVerify.teamVerify("TL","DEV","PO"), controller.update);
 router.delete("/:id",Auth,TeamVerify.teamVerify("TL","PO"), controller.remove);
 module.exports = router;

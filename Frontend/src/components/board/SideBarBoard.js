@@ -3,6 +3,7 @@ import "./slide.css";
 import { Teams } from "../team/Teams";
 import {Tasks} from '../task/Tasks';
 import {Sprint} from '../sprint/Sprint';
+
 export const SideBarBoard = () => {
   return (
     <>

@@ -33,7 +33,6 @@ class UserService extends BaseService {
         const encryptedPassword = await bcrypt.hash(element.password, 10);
 
         const findCriteria = { email: element.email };
-         console.log(encryptedPassword);
         const createdUser = await super.create({...element, password: encryptedPassword },
             findCriteria
         );
@@ -60,10 +59,7 @@ class UserService extends BaseService {
     }
 
     getAll(params = {}, populateField) {
-        console.log(params);
-        console.log(Object.keys(params));
         if (Object.keys(params).includes('isEnterprise')) {
-            console.log(params);
             return super.getAll(params, populateField);
         } else if (params.name) {
             return this.repository.list(params.name, populateField);
@@ -72,7 +68,6 @@ class UserService extends BaseService {
     }
     async verifyPassword(passwordDB, password) {
         const paa = await bcrypt.hash(password, 10)
-            //console.log(paa)
         const isCorrect = await this.repository.verifyPwd(passwordDB, password);
         if (!isCorrect) {
             const error = new Error("Invalid Credentials");

@@ -20,7 +20,6 @@ class BaseController {
 
     async update(req, res) {
         try {
-            console.log('UPLOADING@@@@@@', req.body);
             const result = await this.service.update(req.params.id, req.body);
 
             return res.status(202).json({ result });

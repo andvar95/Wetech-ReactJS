@@ -13,16 +13,21 @@ export const getReducer = (state={}, action)=>{
         case types.create:
             if(!action.currentState[action.field]) action.currentState[action.field] = []
             const tempVar =  action.currentState[action.field]
-            tempVar.push(action.payload)
-            action.currentState[action.field] = tempVar
-            const create = action.currentState
-            return create
+            if (Object.keys(tempVar).includes("To-Do")) {
+                action.currentState[action.field] = tempVar
+                const create = action.currentState
+                return create;
+            } else {
+                tempVar.push(action.payload)
+                action.currentState[action.field] = tempVar
+                const create = action.currentState
+                return create
+            }
 
         case types.update:
             if(!action.currentState[action.field]) action.currentState[action.field] = []
             let tempUpdate =  action.currentState[action.field]
-            console.log(tempUpdate)
-            console.log(action)
+          
             tempUpdate = tempUpdate.map((data) => (data._id === action.payload._id ? action.payload : data))
             action.currentState[action.field] = tempUpdate
             const update = action.currentState
@@ -34,7 +39,6 @@ export const getReducer = (state={}, action)=>{
             tempDelete = tempDelete.filter((data) => data._id !== action.payload._id)
             action.currentState[action.field] = tempDelete
             const remove = action.currentState
-            console.log(remove)
             return remove
 
 

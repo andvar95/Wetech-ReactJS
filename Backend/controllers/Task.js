@@ -17,7 +17,6 @@ class TaskController extends BaseController {
   queryOut(results, status) {
     let output = {};
 
-    console.log(status);
 
     status.sort((a, b) => (a[2] > b[2] ? 1 : -1));
 
@@ -57,12 +56,10 @@ class TaskController extends BaseController {
 
     statData.dateExpected = endDate;
 
-    console.log(statData);
 
     const stat = new Stats(statData);
     const result = await stat.save();
 
-    console.log(result);
 
     if (!result) res.status(400).send({ message: "Error creating Team" });
 
@@ -71,23 +68,23 @@ class TaskController extends BaseController {
 
   async create(req, res) {
     //const status = await Status.findOne({ name: "To-Do" });
-    const project = await Project.findById(req.query.project);
-    const status = project.status.filter((stat) => stat.name === "To-Do");
+    
+    // const project = await Project.findById(req.query.project);
+    
+    // const status = project.status.filter((stat) => stat === "To-Do");
 
-    req.body.historial = [status[0].name];
-    req.body.status = status[0].name;
-    console.log(req.body);
+    // req.body.historial = status;
+    req.body.status = "To-Do";
 
     const statId = await this.createStat(req, res, req.body.duration);
-    console.log(statId);
 
     req.body.stats = statId;
-
     try {
+      console.log("Request task",req.body)
       const result = await this.service.create(req.body);
-
       return res.status(201).json({ result });
     } catch (error) {
+      console.log('ERROASD',error)
       return res.status(error.status || 500).json({ message: error.message });
     }
   }
@@ -106,8 +103,6 @@ class TaskController extends BaseController {
     if (req.query.user) idUser = req.query.user;
     else idUser = req.user._id;
 
-    console.log(req.query);
-    console.log(req.params);
 
     try {
       if (req.query.sprint && ["DEV"].includes(req.params["RoleProject"]))
@@ -125,13 +120,11 @@ class TaskController extends BaseController {
           populateField
         );
       else if (req.query.sprint && ["PO"].includes(req.params["RoleProject"])) {
-        console.log("as");
         results = await this.service.getAll(
           { sprint: req.query.sprint },
           populateField
         );
       } else if (req.query.team && ["PO"].includes(req.params["RoleProject"])) {
-        console.log("estoy dentro", req.query);
         results = await this.service.getAll(
           { $and: [{ team: req.query.team }] },
           populateField
@@ -152,7 +145,6 @@ class TaskController extends BaseController {
           populateField
         );
       else if (req.query.team && ["DEV"].includes(req.params["RoleProject"])) {
-        console.log("Team dev");
         results = await this.service.getAll(
           { $and: [/*{ usersId: idUser }*/ { team: req.query.team }] },
           populateField
@@ -163,7 +155,6 @@ class TaskController extends BaseController {
           populateField
         );
       else if (["DEV"].includes(req.params["RoleProject"])) {
-        console.log(idUser, req.query.project);
         results = await this.service.getAll(
           { $and: [{ sprint: { $in: sprints } }, { usersId: idUser }] },
           populateField
@@ -193,14 +184,11 @@ class TaskController extends BaseController {
   }
 
   async update(req, res) {
-    console.log(req.body.status);
-    console.log(req.body.historial);
     if (req.body.status !== req.body.historial[req.body.historial.lenght])
       req.body.historial.push(req.body.status);
 
     try {
       const result = await this.service.update(req.params.id, req.body);
-      console.log("BaseController ~ results", results);
 
       return res.status(202).json({ result });
     } catch (error) {
