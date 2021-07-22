@@ -2,7 +2,16 @@ import { fetchConToken } from "../helpers/fetch";
 import { types } from "../types/types";
 
 
+const getField = (endpoint) =>{
+    let field = ""
+    if(endpoint.includes("/")){
+        return endpoint.split('/')[0]
+     
+        
+    }
+    return endpoint
 
+}
 
 export const getAll = (endpoint) =>{
     return async(dispatch,getState) =>{
@@ -12,8 +21,12 @@ export const getAll = (endpoint) =>{
         const content = await res.json();
         const {items} = getState();
        
-        console.log(content)
-        dispatch({type:types.getAll,payload:content.result,currentState:items,field:endpoint})
+        
+        const field = getField(endpoint)
+       
+        
+
+        dispatch({type:types.getAll,payload:content.result,currentState:items,field:field})
 
         
     }
@@ -22,13 +35,12 @@ export const getAll = (endpoint) =>{
 export const create = (endpoint,body)=>{
     return async(dispatch,getState) =>{
         const res = await fetchConToken(endpoint,body,'POST');
-        console.log("RESPUESTA",res);
         const content = await res.json();
-
         const {items} = getState();
         console.log(getState())
+        const field = getField(endpoint)
         //dispatch(getAll(endpoint))
-        dispatch({type:types.create,payload:content.result,currentState:items,field:endpoint})
+        dispatch({type:types.create,payload:content.result,currentState:items,field:field})
 
     }
 }
@@ -39,10 +51,11 @@ export const update = (endpoint,body)=>{
     return async(dispatch,getState) =>{
         const res = await fetchConToken(endpoint,body,'PUT');
         const content = await res.json();
-
+    
         const {items} = getState();
         //dispatch(getAll(endpoint))
-        dispatch({type:types.update,payload:content.result,currentState:items,field:endpoint})
+        const field = getField(endpoint)
+        dispatch({type:types.update,payload:content.result,currentState:items,field:field})
     }
 }
 
@@ -54,7 +67,8 @@ export const remove = (endpoint,body)=>{
         console.log('COENTNET',content.body);
         const {items} = getState();
         //dispatch(getAll(endpoint))
-        dispatch({type:types.delete,payload:content.result,currentState:items,field:endpoint})
+        const field = getField(endpoint)
+        dispatch({type:types.delete,payload:content.result,currentState:items,field:field})
     }
  
 }

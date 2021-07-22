@@ -5,6 +5,8 @@ import {FormProjects} from "./FormProjects";
 
 export const Projects = ({history}) => {
 
+   
+
     const dispatch = useDispatch()
     const [projectSelect, SetProjectSelect] = useState({
         name: "",
@@ -12,7 +14,7 @@ export const Projects = ({history}) => {
         members: [localStorage.getItem("user")],
       });
 
-    const {project} = useSelector(state=>state.items);
+    const {project} = useSelector(state=>state.items,()=>{});
     const [modal, setModal] = useState(false);
 
     const handleCreate = () => {

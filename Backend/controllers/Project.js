@@ -121,18 +121,18 @@ class ProjectController extends BaseController {
             else return {userId: member, Role: dev._id }
         })
 
-    console.log(req.body)
+  
         try {
-            const results = await this.service.update(req.params.id, req.body);
-
+            const result = await this.service.update(req.params.id, req.body);
+            console.log(result)
             if (req.body.members) {
-                let id_Members = results.members.map((member) => member.userId);
+                let id_Members = result.members.map((member) => member.userId);
                 const team = await this.mainTeamUpdate(req, res, id_Members);
 
                 if (!team) return res.status(400).send("Error updating Team");
             }
 
-            return res.status(202).json({ results });
+            return res.status(202).json({ result });
         } catch (error) {
             return res.status(500).json({ message: error.message });
         }
