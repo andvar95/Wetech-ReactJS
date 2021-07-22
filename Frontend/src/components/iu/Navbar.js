@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {SideBarBoard} from "../board/SideBarBoard";
 import {Link} from 'react-router-dom';
-
+import {FormCountDown} from '../countdown/FormCountDown';
 import { useDispatch} from "react-redux";
 import './navbar.css';
 import { logout } from '../../actions/auth';
@@ -29,7 +29,8 @@ export const Navbar = () => {
       </button>
     <Link className="navbar-brand" to="/">WeTech</Link>
     
-        </div>       
+        </div> 
+        <FormCountDown/>      
 
         <div className="dropdown">
     <a href="#" className="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -42,7 +43,6 @@ export const Navbar = () => {
         <li><a className="dropdown-item" href="#">Profile</a></li>
         <li><hr className="dropdown-divider"/></li>
         <li onClick={handleLogout}><a  className="dropdown-item" href="#">Logout</a></li>
-        {/* <Link className="dropdown-item" to="/auth/login">Salir</Link>          */}
       </ul>        </div>
 
 

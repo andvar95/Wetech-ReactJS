@@ -1,19 +1,47 @@
-import React from 'react';
+import React ,{useEffect,} from 'react';
 import {useForm} from "../../hooks/useForm";
+import { create, getAll, update } from "../../actions/base";
+import { useDispatch, useSelector } from "react-redux";
+export const FormSprint = ({onClose=(modal)=>modal,sprint}) => {
+  let itemTeam = { ...sprint };
+  const dispatch = useDispatch();
 
-export const FormSprint = ({onClose=(modal)=>modal}) => {
-    const [formValues, handleInputChange ]  = useForm({
-        name:'Your Team Name',
-        description:'Write down about your team'
-      })
+  const { items } = useSelector(
+    (state) => state,
+    () => {}
+  ); 
 
-      const {name,description} = formValues;
+  const [
+    formValues,
+    handleInputChange,
+    reset,
+    ,
+    ,
+    ,
+    setValues,
+  ] = useForm(itemTeam);
 
-      const handleCreateSprint = (event) =>{
-        event.preventDefault();
-      
-      }
-    
+  useEffect(() => {
+    setValues({
+      name: sprint.name,
+      description: sprint.description,
+      project: sprint.project,
+    });
+  }, [sprint]);
+  
+  const { name, description  } = formValues;
+
+  const handleCreateSprint = (event) => {
+    event.preventDefault();
+    if (sprint._id) {
+      //edit
+      dispatch(update(`sprint/${sprint._id}`, formValues));
+    } else {
+      dispatch(create("sprint", formValues));
+    }
+    reset();
+  };
+
   
     return (
      
@@ -24,7 +52,7 @@ export const FormSprint = ({onClose=(modal)=>modal}) => {
                     <input 
                     type="text" 
                     placeholder="name" 
-                    name="Name"
+                    name="name"
                     className="auth__input"
                     autoComplete ="off"
                     value={name}
