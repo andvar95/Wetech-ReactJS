@@ -69,8 +69,3 @@ export const checkAuth= () =>{
 
 
 
-
-const login = (user) =>({
-    type:types.authLogin,
-
-})

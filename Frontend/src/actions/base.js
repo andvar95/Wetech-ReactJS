@@ -3,18 +3,28 @@ import { types } from "../types/types";
 
 
 const getField = (endpoint) =>{
-    let field = ""
     if(endpoint.includes("/")){
         return endpoint.split('/')[0]
-     
-        
     }
     return endpoint
 
 }
 
+ const loading=(state)=>{
+    return async(dispatch,getState)=>{
+        const {items} = getState();
+      
+        dispatch({type:types.loading,payload:state,currentState:items})
+
+       
+    }
+   
+}
+
 export const getAll = (endpoint) =>{
     return async(dispatch,getState) =>{
+        
+     
 
         const res = await fetchConToken(endpoint,{},'GET')
         console.log("Rest",res)
@@ -26,9 +36,7 @@ export const getAll = (endpoint) =>{
        
         
 
-        dispatch({type:types.getAll,payload:content.result,currentState:items,field:field})
-
-        
+         dispatch({type:types.getAll,payload:content.result,currentState:items,field:field})
     }
 }
 
@@ -37,7 +45,6 @@ export const create = (endpoint,body)=>{
         const res = await fetchConToken(endpoint,body,'POST');
         const content = await res.json();
         const {items} = getState();
-        console.log(getState())
         const field = getField(endpoint)
         //dispatch(getAll(endpoint))
         dispatch({type:types.create,payload:content.result,currentState:items,field:field})
@@ -56,6 +63,7 @@ export const update = (endpoint,body)=>{
         //dispatch(getAll(endpoint))
         const field = getField(endpoint)
         dispatch({type:types.update,payload:content.result,currentState:items,field:field})
+      
     }
 }
 

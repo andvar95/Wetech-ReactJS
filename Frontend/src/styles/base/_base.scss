@@ -48,3 +48,23 @@ main{
 .wrap-content div {
     margin:10px;
 }
+
+.base__wait{
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    height:100vh;
+   font-size:50px ;
+   color:$primary;
+}
+
+.base__wait-header{
+    display: flex;
+    width:100vw;
+    justify-content: space-between;
+    max-width: 100vw;
+    background-color: $primary;
+    color:white;
+    z-index:1;
+    transition: all 1s ease-out;
+}

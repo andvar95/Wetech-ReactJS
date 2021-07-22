@@ -19,7 +19,6 @@ export const Projects = ({history}) => {
 
     const handleCreate = () => {
         setModal(true);
-        setModal(true);
         SetProjectSelect({
           name: "",
           description: "",
@@ -49,6 +48,7 @@ export const Projects = ({history}) => {
    
 
     },[dispatch])
+
 
     return (
         <>

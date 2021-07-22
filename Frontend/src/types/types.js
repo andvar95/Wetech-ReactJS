@@ -16,7 +16,10 @@ export const types ={
     getByProject:'[base] Get By Project',
     create:'[base] Create',
     update:'[base] Update',
-    delete:'[base] Delete'
+    delete:'[base] Delete',
+
+
+    loading:'loading'
 
 
 }

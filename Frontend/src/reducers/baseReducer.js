@@ -21,8 +21,6 @@ export const getReducer = (state={}, action)=>{
         case types.update:
             if(!action.currentState[action.field]) action.currentState[action.field] = []
             let tempUpdate =  action.currentState[action.field]
-            console.log(tempUpdate)
-            console.log(action)
             tempUpdate = tempUpdate.map((data) => (data._id === action.payload._id ? action.payload : data))
             action.currentState[action.field] = tempUpdate
             const update = action.currentState
@@ -36,6 +34,13 @@ export const getReducer = (state={}, action)=>{
             const remove = action.currentState
             console.log(remove)
             return remove
+        
+        case types.loading:
+            if(!action.currentState.loading) action.currentState.loading = false
+            action.currentState.loading = action.payload;
+
+            return action.currentState
+
 
 
         default:

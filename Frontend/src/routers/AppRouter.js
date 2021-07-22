@@ -27,7 +27,12 @@ export const AppRouter = () => {
         dispatch(checkAuth())
     },[dispatch])
 
-    if(checking) return(<><div>Espere</div></>)
+    if(checking) return(<>
+    <div className="navbar__content"> <li>WeTech</li></div>
+
+    <div className="base__wait">Espere</div>
+    
+    </>)
 
 
     return (
