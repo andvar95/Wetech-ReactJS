@@ -9,6 +9,7 @@ export const ListMembers = ({ handleAdd, handleDelete, value, data, type }) => {
         <div className="row align-items-start" key={uuidv4()}>
           <div className="col-10">
             <select
+              className="form-control"
               name="cars"
               id="cars"
               value={value[i]}
