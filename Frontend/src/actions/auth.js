@@ -41,13 +41,31 @@ export const startRegister = ({name,email,address,phone,password,social}) =>{
 
 }
 
-
-export const checkAuth= () =>({
+export const checkInit=()=>({
     type:types.authIsAuth,
     payload:{
-        token:localStorage.getItem('token')}
+        checking:true
+        }
 })
 
+
+export const checkAuth= () =>{
+
+    if(localStorage.getItem('token')){
+    return {type:types.authIsAuth,
+    payload:{
+        token:localStorage.getItem('token'),
+        checking:false}
+    }
+    
+    }
+    else{
+        return {type:types.authIsAuth,
+            payload:{
+                checking:false}
+            }
+    }
+}
 
 
 
