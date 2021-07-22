@@ -75,7 +75,9 @@ class TaskController extends BaseController {
 
     req.body.stats = statId;
     try {
+      console.log("bodead",req.body)
       const result = await this.service.create(req.body);
+      console.log("dad",result)
       return res.status(201).json({ result });
     } catch (error) {
       return res.status(error.status || 500).json({ message: error.message });
