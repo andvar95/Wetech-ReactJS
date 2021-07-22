@@ -49,7 +49,9 @@ export const update = (endpoint,body)=>{
 export const remove = (endpoint,body)=>{
     return async(dispatch,getState) =>{
         const res = await fetchConToken(endpoint,{},'DELETE');
+        console.log('RESPUEST DELETE' ,res);
         const content = await res.json();
+        console.log('COENTNET',content.body);
         const {items} = getState();
         //dispatch(getAll(endpoint))
         dispatch({type:types.delete,payload:content.result,currentState:items,field:endpoint})

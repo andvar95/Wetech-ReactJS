@@ -10,7 +10,7 @@ export const Board = () => {
             <div>
                 <Stack />
             </div>
-
+      
         </div>
     )
 }
