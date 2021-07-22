@@ -28,8 +28,6 @@ export const HomeRoute = () => {
                     path="/home/projects"
                     component={Projects}
                     />
-                    
-                
             
         </Switch>
             </div>

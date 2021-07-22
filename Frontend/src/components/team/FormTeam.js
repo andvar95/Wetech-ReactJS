@@ -1,24 +1,23 @@
 import React, { useEffect } from "react";
 import { useForm } from "../../hooks/useForm";
 import { v4 as uuidv4 } from "uuid";
-import { create, getAll,update } from "../../actions/base";
+import { create, getAll, update } from "../../actions/base";
 
 import { useDispatch, useSelector } from "react-redux";
 
-export const FormTeam =  ({ onClose = (modal) => modal ,team}) => {
-  let itemTeam = {...team};
+export const FormTeam = ({ onClose = (modal) => modal, team }) => {
+  let itemTeam = { ...team };
   const dispatch = useDispatch();
 
+  const { items } = useSelector(
+    (state) => state,
+    () => {}
+  );
 
-  const { items } = useSelector(state=>state);
-  
-
-    useEffect(() => {
-    
+  useEffect(() => {
     dispatch(getAll("users"));
-  }, [dispatch]); 
+  }, [dispatch]);
 
- 
   const [
     formValues,
     handleInputChange,
@@ -26,30 +25,28 @@ export const FormTeam =  ({ onClose = (modal) => modal ,team}) => {
     handleAddArray,
     handleInputGroupChange,
     handleRemoveArray,
-    setValues
-  ] = useForm(
-    
-    itemTeam
-    );
-    useEffect(() => {    
-    
+    setValues,
+  ] = useForm(itemTeam);
+
+  useEffect(() => {
     setValues({
-      name:team.name,
-      description:team.description,
+      name: team.name,
+      description: team.description,
       members: team.members,
       project: team.project,
-    })
-    }, [team]);
+    });
+  }, [team]);
+  
   const { name, description, members } = formValues;
 
   const handleCreateTeam = (event) => {
     event.preventDefault();
-  if(    team._id){//edit
-    dispatch(update(`team/${team._id}`, formValues));
-  }
-  else{
-    dispatch(create("team", formValues));
-  }
+    if (team._id) {
+      //edit
+      dispatch(update(`team/${team._id}`, formValues));
+    } else {
+      dispatch(create("team", formValues));
+    }
     reset();
   };
   const handleAddMember = (event) => {
@@ -82,7 +79,15 @@ export const FormTeam =  ({ onClose = (modal) => modal ,team}) => {
 
         {members.map((member, i) => (
           <div key={uuidv4()}>
-            <select name="cars" id="cars" value={members[i]} name={i} onChange={(e)=>handleInputGroupChange({ target:e ,type:"members"})}>
+            <select
+              name="cars"
+              id="cars"
+              value={members[i]}
+              name={i}
+              onChange={(e) =>
+                handleInputGroupChange({ target: e, type: "members" })
+              }
+            >
               {items.users &&
                 items.users.map((user) => (
                   <option key={user._id} value={user._id}>
@@ -127,7 +132,7 @@ export const FormTeam =  ({ onClose = (modal) => modal ,team}) => {
         </button>
 
         <button
-          className="btn btn-primary btn-block"          
+          className="btn btn-primary btn-block"
           onClick={handleCreateTeam}
         >
           Create Team

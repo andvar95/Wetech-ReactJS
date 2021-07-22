@@ -6,7 +6,7 @@ export const Teams = () => {
 
   const dispatch = useDispatch()
 
-    const items = useSelector(state=>state.items.team)
+  const items = useSelector(state=>state.items.team)
    const [teamSelect, SetTeamSelect] = useState({
     name: "",
     description: "",
@@ -29,10 +29,9 @@ export const Teams = () => {
       description: "",
       project: localStorage.getItem("currentProject"),
       members: [localStorage.getItem("user")],
-    
-    
     });
   };
+  
   const handleEdit = (team)=>{
     
     SetTeamSelect({
