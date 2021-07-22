@@ -13,10 +13,18 @@ export const getReducer = (state={}, action)=>{
         case types.create:
             if(!action.currentState[action.field]) action.currentState[action.field] = []
             const tempVar =  action.currentState[action.field]
-            tempVar.push(action.payload)
-            action.currentState[action.field] = tempVar
-            const create = action.currentState
-            return create
+            if (Object.keys(tempVar).includes("To-Do")) {
+                console.log(tempVar);
+                action.currentState[action.field] = tempVar
+                const create = action.currentState
+                return create;
+            } else {
+                console.log(tempVar);
+                tempVar.push(action.payload)
+                action.currentState[action.field] = tempVar
+                const create = action.currentState
+                return create
+            }
 
         case types.update:
             if(!action.currentState[action.field]) action.currentState[action.field] = []

@@ -19,7 +19,7 @@ export const Tasks = () => {
     importance: "",
     urgency: "",
     tags: [""],
-    userId: [""],
+    usersId: [""],
     sprint: "",
     team: "",
   });
@@ -35,8 +35,8 @@ export const Tasks = () => {
       difficulty: "",
       importance: "",
       urgency: "",
-      tags: [""],
-      userId: [""],
+      tags: [{name:"", color: ""}],
+      usersId: [""],
       sprint: "",
       team: "",
     });
@@ -52,7 +52,7 @@ export const Tasks = () => {
       importance: task.importance, 
       urgency: task.urgency, 
       tags: task.tags, 
-      userId: task.userId, 
+      usersId: task.usersId, 
       sprint: task.sprint, 
       team: task.team,
     });

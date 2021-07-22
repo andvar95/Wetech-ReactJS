@@ -34,8 +34,10 @@ export const getAll = (endpoint) =>{
 
 export const create = (endpoint,body)=>{
     return async(dispatch,getState) =>{
+        console.log(body);
         const res = await fetchConToken(endpoint,body,'POST');
         const content = await res.json();
+        console.log(content);
         const {items} = getState();
         console.log(getState())
         const field = getField(endpoint)

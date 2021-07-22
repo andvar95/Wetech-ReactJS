@@ -2,6 +2,8 @@ import React from "react";
 import "./slide.css";
 import { Teams } from "../team/Teams";
 import {Sprint} from '../sprint/Sprint';
+import {Tasks} from '../task/Tasks';
+
 export const SideBarBoard = () => {
   return (
     <>
@@ -13,6 +15,9 @@ export const SideBarBoard = () => {
           <li className="mb-1">
             <Sprint />
           </li>
+          {/* <li className="mb-1">
+            <Tasks />
+          </li> */}
         </ul>
 
         <hr />

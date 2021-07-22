@@ -10,14 +10,14 @@ export const TaskForm = ({ task, onClose = (modal) => modal }) => {
   const itemTask = { ...task };
   const dispatch = useDispatch();
 
-  const { items } = useSelector(
-    (state) => state,
-    () => {}
+  const { team: teams, users, sprint: sprints } = useSelector(
+    (state) => state.items,
   );
 
   useEffect(() => {
     dispatch(getAll("users"));
   }, [dispatch]);
+
 
   const [
     formValues,
@@ -38,7 +38,7 @@ export const TaskForm = ({ task, onClose = (modal) => modal }) => {
       importance: task.importance,
       urgency: task.urgency,
       tags: task.tags,
-      userId: task.userId,
+      usersId: task.usersId,
       sprint: task.sprint,
       team: task.team,
     });
@@ -52,7 +52,7 @@ export const TaskForm = ({ task, onClose = (modal) => modal }) => {
     importance,
     urgency,
     tags,
-    userId,
+    usersId,
     sprint,
     team,
   } = formValues;
@@ -66,17 +66,13 @@ export const TaskForm = ({ task, onClose = (modal) => modal }) => {
       console.log(formValues);
       dispatch(create("task", formValues));
     }
-    reset();
+    // reset(); 
   };
 
   const handleAddMember = (event) => {
     event.preventDefault();
-    handleAddArray({ inputs: "", type: "userId" });
+    handleAddArray({ inputs: "", type: "usersId" });
   };
-
-  const teams = items.team;
-  const members = items.users;
-  const sprints = items.sprint;
 
   return (
     <div>
@@ -232,10 +228,10 @@ export const TaskForm = ({ task, onClose = (modal) => modal }) => {
                     <ListMembers
                       handleAdd={handleInputGroupChange}
                       handleDelete={handleRemoveArray}
-                      value={userId}
-                      data={members}
+                      value={usersId}
+                      data={users}
                       key={uuidv4()}
-                      type="userId"
+                      type="usersId"
                     />
                     <button
                       onClick={handleAddMember}
