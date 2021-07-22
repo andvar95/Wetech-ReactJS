@@ -8,13 +8,8 @@ import {
 import { AuthRouter } from "./AuthRouter";
 import { useDispatch, useSelector } from "react-redux";
 import { checkAuth } from "../actions/auth";
-
 import { PrivateRoute } from "./PrivateRoute";
-
-import { Board } from "../components/board/Board";
-import { Projects } from "../components/projects/Projects";
 import { HomeRoute } from "./HomeRoute";
-import { Tasks } from "../components/task/Tasks";
 
 export const AppRouter = () => {
 
@@ -67,8 +62,6 @@ export const AppRouter = () => {
             path="/auth"
             component={AuthRouter}
           />
-
-          <Route apth="/tasks" component={Tasks} />
 
           <Redirect to="/auth/login" />
         </Switch>
