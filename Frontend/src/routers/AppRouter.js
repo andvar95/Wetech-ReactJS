@@ -17,7 +17,6 @@ import { HomeRoute } from "./HomeRoute";
 import { Tasks } from "../components/task/Tasks";
 
 export const AppRouter = () => {
-<<<<<<< HEAD
 
     const dispatch = useDispatch()
     const {token,checking} =  useSelector(state=>state.auth);
@@ -47,25 +46,6 @@ export const AppRouter = () => {
                         component={HomeRoute}
                         />
                         {/*
-=======
-  const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth);
-
-  useEffect(() => {
-    dispatch(checkAuth());
-  }, [dispatch]);
-
-  return (
-    <Router>
-      <div>
-        <Switch>
-          <PrivateRoute
-            isAuthenticated={!!token}
-            path="/home"
-            component={HomeRoute}
-          />
-          {/*
->>>>>>> master
 
                         <PrivateRoute
                          exact
