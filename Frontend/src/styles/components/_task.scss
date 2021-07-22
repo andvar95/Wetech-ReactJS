@@ -1,0 +1,20 @@
+.task__containerTask .stack {
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+  width: 230px;
+  margin-top: 5px;
+  border-radius: 5px;
+}
+
+.task__containerTask {
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  width: 220px;
+  overflow: hidden;
+  margin-bottom: 15px;
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-radius: 5px;
+  background-color: white;
+}
