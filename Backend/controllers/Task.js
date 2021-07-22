@@ -15,24 +15,27 @@ class TaskController extends BaseController {
   }
 
   queryOut(results, status) {
-    let output = [];
+    let output = {};
 
     console.log(status);
 
     status.sort((a, b) => (a[2] > b[2] ? 1 : -1));
 
     status.forEach((stat) => {
-      output.push({
+      output[stat[0].toString()] = {
         title: stat[0],
         id: stat[1],
         tasks: [],
-      });
+      };
     });
 
+  
+
     results.forEach((task) => {
-      output.forEach((out) => {
-        if (task.status === out.title) {
-          out.tasks.push(task);
+      Object.keys(output).forEach((out) => {
+
+        if (task.status === out) {
+          output[out].tasks.push(task);
         }
       });
     });

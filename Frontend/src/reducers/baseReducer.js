@@ -21,6 +21,8 @@ export const getReducer = (state={}, action)=>{
         case types.update:
             if(!action.currentState[action.field]) action.currentState[action.field] = []
             let tempUpdate =  action.currentState[action.field]
+            console.log(tempUpdate)
+            console.log(action)
             tempUpdate = tempUpdate.map((data) => (data._id === action.payload._id ? action.payload : data))
             action.currentState[action.field] = tempUpdate
             const update = action.currentState
