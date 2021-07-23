@@ -188,7 +188,7 @@ export const TaskForm = ({ task, onClose = (modal) => modal }) => {
                       value={team.name}
                     >
                       {teams && teams.map((team, i) => (
-                        <option key={uuidv4()} value={team._id}>
+                        <option key={team._id} value={team._id}>
                           {team.name}
                         </option>
                       ))}
@@ -201,15 +201,13 @@ export const TaskForm = ({ task, onClose = (modal) => modal }) => {
                     </label>
                     <select
                       className="form-control"
-                      list="listSprints"
-                      placeholder="Select sprint"
-                      id="listSprints"
-                      value={sprint.name}
                       name="sprint"
+                      placeholder="Select sprint"
+                      value={sprint.name}
                       onChange={handleInputChange}
                     >
                       {sprints && sprints.map((sprint, i) => (
-                        <option key={uuidv4()} value={sprint._id}>
+                        <option key={sprint._id} value={sprint._id}>
                           {sprint.name}
                         </option>
                       ))}

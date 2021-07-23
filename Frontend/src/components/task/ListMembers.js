@@ -9,10 +9,8 @@ export const ListMembers = ({ handleAdd, handleDelete, value, data, type }) => {
           <div className="col-10">
             <select
               className="form-control"
-              name="cars"
-              id="cars"
               value={value[i]}
-              name={i}
+              name={`${type,i}`}
               onChange={(e) => handleAdd({ target: e, type })}
             >
               {data && data.map((d, i) => (
