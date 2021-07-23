@@ -10,7 +10,7 @@ export const ListMembers = ({ handleAdd, handleDelete, value, data, type }) => {
             <div className="col-10">
               <select
                 className="form-control"
-                value={value[i]}
+                value={v}
                 name={`${(type, i)}`}
                 required
                 onChange={(e) => handleAdd({ target: e, type })}
