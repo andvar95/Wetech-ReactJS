@@ -65,7 +65,7 @@ export const TaskForm = ({ task, onClose = (modal) => modal }) => {
     } else {
       dispatch(create("task", formValues));
     }
-    reset(); 
+    reset();
     onClose(false);
   };
 
@@ -77,7 +77,7 @@ export const TaskForm = ({ task, onClose = (modal) => modal }) => {
   return (
     <div>
       <form onSubmit={handleCreateTask}>
-        <div className="card w-75">
+        <div className="card w-80">
           <div className="card-body">
             <ul className="list-group list-group-flush">
               <li className="list-group-item">
@@ -86,45 +86,51 @@ export const TaskForm = ({ task, onClose = (modal) => modal }) => {
 
               <li className="list-group-item">
                 <div className="row">
-                  <div className="col-7">
+                  <div className="col-6">
                     <label htmlFor="name" className="form-label">
                       Task name:
                     </label>
                     <input
                       type="text"
+                      className="form-control"
                       placeholder="name"
                       name="name"
                       autoComplete="off"
                       value={name}
                       onChange={handleInputChange}
+                      required
                     ></input>
                   </div>
-                  <div className="col-5">
+                  <div className="col-6">
                     <label htmlFor="duration" className="form-label">
                       Deadline:
                     </label>
                     <input
                       type="date"
+                      className="form-control"
                       name="duration"
                       value={duration}
                       onChange={handleInputChange}
+                      required
                     ></input>
                   </div>
                 </div>
               </li>
 
               <li className="list-group-item">
-                <div className="row">
+                <div className="row w-90">
                   <label htmlFor="description" className="form-label">
-                    Task description:
+                    Description:
                   </label>
                   <input
                     type="text"
+                    className="form-control"
                     placeholder="description"
                     name="description"
                     autoComplete="off"
                     value={description}
                     onChange={handleInputChange}
+                    required
                   ></input>
                 </div>
               </li>
@@ -133,41 +139,47 @@ export const TaskForm = ({ task, onClose = (modal) => modal }) => {
                 <div className="row">
                   <div className="col-4">
                     <label htmlFor="difficulty" className="form-label">
-                      Task difficulty:
+                      Difficulty:
                     </label>
                     <input
                       type="number"
+                      className="form-control"
                       name="difficulty"
                       value={difficulty}
                       onChange={handleInputChange}
                       min="1"
                       max="5"
+                      required
                     ></input>
                   </div>
                   <div className="col-4">
                     <label htmlFor="importance" className="form-label">
-                      Task importance:
+                      Importance:
                     </label>
                     <input
                       type="number"
+                      className="form-control"
                       name="importance"
                       value={importance}
                       onChange={handleInputChange}
                       min="1"
                       max="5"
+                      required
                     ></input>
                   </div>
                   <div className="col-4">
                     <label htmlFor="urgency" className="form-label">
-                      Task urgency:
+                      Urgency:
                     </label>
                     <input
                       type="number"
+                      className="form-control"
                       name="urgency"
                       value={urgency}
                       onChange={handleInputChange}
                       min="1"
                       max="5"
+                      required
                     ></input>
                   </div>
                 </div>
@@ -179,22 +191,23 @@ export const TaskForm = ({ task, onClose = (modal) => modal }) => {
                     <label htmlFor="members" className="form-label">
                       Team:
                     </label>
-                 <select
+                    <select
                       className="form-control"
                       name="team"
-                      onChange={handleInputChange}
-                      list="listTeam"
                       placeholder="Select team"
                       value={team.name}
+                      required
+                      onChange={handleInputChange}
                     >
-                          <option value="" selected disabled hidden>
-                  Choose here
-                </option>
-                      {teams && teams.map((team, i) => (
-                        <option key={team._id} value={team._id}>
-                          {team.name}
-                        </option>
-                      ))}
+                      <option value="" selected disabled hidden>
+                        Choose here
+                      </option>
+                      {teams &&
+                        teams.map((team, i) => (
+                          <option key={team._id} value={team._id}>
+                            {team.name}
+                          </option>
+                        ))}
                     </select>
                   </div>
 
@@ -204,23 +217,21 @@ export const TaskForm = ({ task, onClose = (modal) => modal }) => {
                     </label>
                     <select
                       className="form-control"
-                      list="listSprints"
-                      placeholder="Select sprint"
-                      id="listSprints"
-                      value={sprint.name}
                       name="sprint"
+                      placeholder="Select sprint"
+                      value={sprint.name}
+                      required
                       onChange={handleInputChange}
                     >
                       <option value="" selected disabled hidden>
-                  Choose here
-                </option>
-                      {
-                      
-                      sprints && sprints.map((sprint, i) => (
-                        <option key={sprint._id} value={sprint._id}>
-                          {sprint.name}
-                        </option>
-                      ))}
+                        Choose here
+                      </option>
+                      {sprints &&
+                        sprints.map((sprint, i) => (
+                          <option key={sprint._id} value={sprint._id}>
+                            {sprint.name}
+                          </option>
+                        ))}
                     </select>
                   </div>
                 </div>
