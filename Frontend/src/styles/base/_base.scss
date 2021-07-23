@@ -10,6 +10,9 @@ body {
   width: 100vw;
 }
 
+.white{
+  color:white;
+}
 .none {
   display: none;
 }
@@ -46,6 +49,9 @@ main {
   flex-wrap: wrap;
 }
 
+.m5 >*{
+  margin:1px;
+}
 .wrap-content div {
   margin: 10px;
 }
@@ -56,4 +62,8 @@ main {
 
 .spacerR {
   flex: 1 1 auto;
+}
+
+.text-error{
+  color:red;
 }

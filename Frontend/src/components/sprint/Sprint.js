@@ -51,18 +51,18 @@ export const Sprint = () => {
               data-bs-target="#sprint-collapse"
               aria-expanded="true"
             >
-              Sprints
+              <span className="white">Sprints</span>
             </button>
           </div>
           <div className="col-md-4">
-            <button
+            {localStorage.getItem('rolProject')==='PO'&&<button
               className="btn btn-primary"
               onClick={() => {
                 handleCreate();
               }}
             >
               <i className="fas fa-plus-circle"></i>
-            </button>
+            </button>}
           </div>
         </div>
         <div className="collapse show" id="sprint-collapse">
@@ -73,19 +73,19 @@ export const Sprint = () => {
                   <div className="col-md-8">
                     <li className="link-ligth rounded">{element.name}</li>
                   </div>
-                  <div className="col-md-4">
-                    <button
+                  <div className="m5 col-md-4">
+                    {localStorage.getItem('rolProject')==='PO'&&<button
                       className="btn btn-warning btn-sm"
                       onClick={() => handleEdit(element)}
                     >
                       <i className="fas fa-pen"></i>
-                    </button>
-                    <button
+                    </button>}
+                    {localStorage.getItem('rolProject')==='PO'&&<button
                       className="btn btn-danger btn-sm"
                       onClick={() => handleDelete(element._id)}
                     >
                       <i className="fas fa-trash"></i>
-                    </button>
+                    </button>}
                   </div>
                 </div>
               ))}

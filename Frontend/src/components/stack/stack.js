@@ -1,6 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAll, update } from "../../actions/base";
+import { getRoleProject} from "../../actions/auth"
+import { TaskForm} from "../task/TaskForm";
 
 export default function Stack() {
   const dispatch = useDispatch();
@@ -10,12 +12,18 @@ export default function Stack() {
     () => {}
   );
 
+
+
   if (task) {
     tasks = task;
   }
+  useEffect(() => {
+    dispatch(getRoleProject());
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(getAll("task"));
+    dispatch(getRoleProject());
   }, [dispatch]);
 
   const handleStatus = (event, mytask) => {
@@ -25,13 +33,51 @@ export default function Stack() {
     dispatch(update(`task/${mytask._id}`, data));
   };
 
+
+  /*Task edit */
+
+  const [taskSelect, SetTaskSelect] = useState({
+    name: "",
+    description: "",
+    duration: "",
+    difficulty: "",
+    importance: "",
+    urgency: "",
+    tags: [""],
+    usersId: [""],
+    sprint: "",
+    team: "",
+  });
+
+  const [modal, setModal] = useState(false);
+;
+
+  const handleEdit = (task)=>{
+    SetTaskSelect({
+      _id: task._id,
+      name: task.name, 
+      description: task.description, 
+      duration: task.duration, 
+      difficulty: task.difficulty, 
+      importance: task.importance, 
+      urgency: task.urgency, 
+      tags: task.tags, 
+      usersId: task.usersId, 
+      sprint: task.sprint, 
+      team: task.team,
+    });
+      
+    setModal(true);
+  }
+
   return (
+    <>
     <div className="wrap-content">
       {tasks &&
         tasks.map((task, i) => (
           <div className="stack__Stack" key={i}>
             <div className="stack__headerTask">
-              <span className="task__nameTask">
+              <span    onClick={() => handleEdit(task)}className="task__nameTask">
                 <h6>{task.name}</h6>
               </span>
               {task.status === "Done" && (
@@ -78,5 +124,9 @@ export default function Stack() {
           </div>
         ))}
     </div>
+    {localStorage.getItem('rolProject')==='PO'&&<div className={modal ? "modal" : "none"}>
+        <TaskForm task={taskSelect} onClose={(modal) => setModal(modal)}/>
+      </div>}
+    </>
   );
 }

@@ -5,9 +5,16 @@ import {FormCountDown} from '../countdown/FormCountDown';
 import { useDispatch} from "react-redux";
 import './navbar.css';
 import { logout } from '../../actions/auth';
+import { useLocation} from 'react-router-dom';
 
 export const Navbar = () => {
   const [sidebar, setSidebar] = useState(false);
+
+
+
+  const location = useLocation().pathname;
+
+  
 
   const dispatch = useDispatch();
   const handleSidebar = () => {
@@ -25,7 +32,7 @@ export const Navbar = () => {
     <button className="navbar-toggler" onClick={handleSidebar}>
     <span className="navbar-toggler-icon"></span>
   </button>
-<Link className="navbar-brand" to="/">WeTech</Link>
+<Link className="navbar-brand" to="/home/projects">WeTech</Link>
 
     </div> 
     <FormCountDown/>      
@@ -47,7 +54,7 @@ export const Navbar = () => {
     
 </div>
 </nav>
-{sidebar&& <div>
+{(sidebar&& location==='/home/board') && <div>
     <SideBarBoard />
      </div>}
     

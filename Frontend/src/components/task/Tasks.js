@@ -68,11 +68,14 @@ export const Tasks = () => {
   
   return (
     <>
+      {localStorage.getItem('rolProject')==='PO'&&
+      <div>
       <h2>Tasks</h2>
       <button onClick={handleCreate} className="btn btn-primary">Create Task</button>
       <div className={modal ? "modal" : "none"}>
         <TaskForm task={taskSelect} onClose={(modal) => setModal(modal)}/>
       </div>
+      </div>}
     </>
   );
 };

@@ -188,12 +188,12 @@ class ProjectController extends BaseController {
         const iAm = project.members.filter(member=>member.userId.equals(req.user._id))
         const role = await Role.findOne({_id:iAm[0].Role})
         let result = {}
-         rol.rol =role.name
+        result.rol =role.name
 
-        if(role.name === "PO") rol.opt = options.links.filter(link=>PO.indexOf(link.url)!== -1)
-        if(role.name === "DEV") rol.opt = options.links.filter(link=>DEV.indexOf(link.url)!== -1)
-        if(role.name === "SM") rol.opt = options.links.filter(link=>SM.indexOf(link.url)!== -1)
-        if(role.name === "TL") rol.opt = options.links.filter(link=>TL.indexOf(link.url)!== -1)
+        if(role.name === "PO") result.opt = options.links.filter(link=>PO.indexOf(link.url)!== -1)
+        if(role.name === "DEV") result.opt = options.links.filter(link=>DEV.indexOf(link.url)!== -1)
+        if(role.name === "SM") result.opt = options.links.filter(link=>SM.indexOf(link.url)!== -1)
+        if(role.name === "TL") result.opt = options.links.filter(link=>TL.indexOf(link.url)!== -1)
 
        
 

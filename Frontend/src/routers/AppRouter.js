@@ -32,9 +32,7 @@ export const AppRouter = () => {
                 <div>
                     <Switch>
 
-                    <PrivateRoute
-                         
-                         
+                    <PrivateRoute        
                          isAuthenticated={!!token}
                          path="/home" 
                         component={HomeRoute}

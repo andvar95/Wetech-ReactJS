@@ -1,34 +1,51 @@
 import React from "react";
-import { useDispatch,} from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import { Link } from "react-router-dom";
 import {useForm} from "../../hooks/useForm";
-import { startLogin} from "../../actions/auth";
+import { startLogin,errorMessage} from "../../actions/auth";
 
 
 export const LoginScreen = ({history}) => {
 
   const dispatch = useDispatch()
+  const {token,error} = useSelector(state=>state.auth)
 
+
+  if(error){
+    console.log(error);
+    setTimeout(()=>{
+      console.log("terminar error");
+      dispatch(errorMessage(''))
+
+    },6000)
+
+  }
 
   const [formValues, handleInputChange ]  = useForm({
-    email:'varelo@gmail.com',
-    password:'1234'
+    email:'',
+    password:''
   })
 
   const {email,password} = formValues;
 
+ 
+
   const handleLogin = (event) =>{
     event.preventDefault();
-    
-    dispatch(startLogin(email,password))
-    history.replace('/home/projects');
-    
+    dispatch(startLogin(email,password))   
+    history.push("/home/projects")
   
   }
+
+  if(token)history.push("/home/projects")
+
   
 
   return (
     <div>
+      {error&&<div className="text-error">
+         Email or password invalid
+        </div>}
       <h3 className="auth__title">Login</h3>
       <form onSubmit={handleLogin}>
         <input 

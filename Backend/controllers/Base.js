@@ -55,6 +55,7 @@ class BaseController {
     }
 
     async remove(req, res) {
+        console.log("remove")
         try {
             const result = await this.service.remove(req.params.id);
             return res.status(202).json({ result });

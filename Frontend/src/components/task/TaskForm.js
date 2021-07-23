@@ -61,7 +61,7 @@ export const TaskForm = ({ task, onClose = (modal) => modal }) => {
   const handleCreateTask = (event) => {
     event.preventDefault();
     if (task._id) {
-      dispatch(update(`task/${team._id}`, formValues));
+      dispatch(update(`task/${task._id}`, formValues));
     } else {
       dispatch(create("task", formValues));
     }
@@ -252,7 +252,8 @@ export const TaskForm = ({ task, onClose = (modal) => modal }) => {
             </ul>
           </div>
           <button className="btn btn-primary" type="submit">
-            Create task
+           
+            {!task._id?'Create task':'Edit Task'}
           </button>
         </div>
       </form>

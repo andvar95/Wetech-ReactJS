@@ -9,6 +9,8 @@ const getField = (endpoint) => {
   return endpoint;
 };
 
+
+
 export const getAll = (endpoint) => {
   return async (dispatch, getState) => {
     const res = await fetchConToken(endpoint, {}, "GET");
@@ -63,8 +65,9 @@ export const remove = (endpoint, body) => {
   return async (dispatch, getState) => {
     const res = await fetchConToken(endpoint, {}, "DELETE");
     const content = await res.json();
+    console.log(content);
     const { items } = getState();
-    //dispatch(getAll(endpoint))
+    console.log("del"+content)
     const field = getField(endpoint);
     dispatch({
       type: types.delete,

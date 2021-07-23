@@ -2,23 +2,24 @@ import React from 'react';
 import validator from 'validator';
 import { Link } from "react-router-dom";
 import {useForm} from "../../hooks/useForm";
-import { useDispatch,} from "react-redux";
-import {startRegister} from "../../actions/auth"
+import { useDispatch, useSelector} from "react-redux";
+import {startRegister,errorMessage} from "../../actions/auth"
 import templateSocial from "../../helpers/templateSocial";
 
-export const RegisterScreen = () => {
+export const RegisterScreen = ({history}) => {
 
   const dispatch = useDispatch(); //dispatch actions
+  const {token,error} = useSelector(state=>state.auth)
   
 
 
   const [formValues, handleInputChange ]  = useForm({
-    name:'andres',
-    email:'andres@gmail.com',
-    phone:"12313123",
-    address:'Calle 1',
-    password:'123456',
-    password2:'123456',
+    name:'',
+    email:'',
+    phone:"",
+    address:'',
+    password:'',
+    password2:'',
     social:[
       { name: 'Website', description: '' },
       { name: 'Github', description: '' },
@@ -33,24 +34,40 @@ export const RegisterScreen = () => {
   
   const handleRegister =(event) =>{
     event.preventDefault();
-    if(isFormValid()) dispatch(startRegister({name,email,address,phone,password,social}
-    ))
+    if(isFormValid()) 
+    {
+    dispatch(startRegister({name,email,address,phone,password,social}))
+    history.push("/home/projects")
+  }
     
 
   }
 
+  if(token)history.push("/home/projects")
+
+  if(error){
+    console.log(error);
+    setTimeout(()=>{
+      console.log("terminar error");
+      dispatch(errorMessage(''))
+
+    },6000)
+
+  }
+
+
   
   const isFormValid = ()=>{
     if(name.trim().length === 0){
-      //dispatch(setError('Name is required'))
+      dispatch(errorMessage('Name is required'))
       return false
     }
     else if(!validator.isEmail(email)) {
-      //dispatch(setError('Email is not valid'))
+      dispatch(errorMessage('Email is not valid'))
       return false
     }
     else if(password !== password2 || password.length <1) {
-      //dispatch(setError('Password should be at least 6 characterers and match each other'))
+      dispatch(errorMessage('Password should be at least 6 characterers and match each other'))
       return false
     }
 
@@ -63,6 +80,10 @@ export const RegisterScreen = () => {
         <div>
              <h3 className="auth__title">Register</h3>
       <form onSubmit={handleRegister}>
+
+      {error&&<div className="text-error">
+         {error}
+        </div>}
    {/*
      msgError&&(
         <div className="auth__alert-error">

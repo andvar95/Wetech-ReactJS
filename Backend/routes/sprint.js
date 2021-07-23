@@ -10,7 +10,7 @@ const controller = new Controller(Service);
 
 router.get("/", Auth, TeamVerify.teamVerify("PO","DEV","TL","SM"),(req, res) => controller.list(req, res, [{ path: 'project' }]));
 router.get("/:id", Auth,TeamVerify.teamVerify("PO","DEV","TL","SM"), (req, res) => controller.getOne(req, res, [{ path: 'project' }]));
-router.post("/", Auth, TeamVerify.teamVerify("TL", "SM", "PO"), controller.create);
-router.put("/:id", Auth, TeamVerify.teamVerify("TL", "SM", "PO"), controller.update);
-router.delete("/:id", Auth, TeamVerify.teamVerify("TL", "SM"), controller.remove);
+router.post("/", Auth, TeamVerify.teamVerify("TL", "SM", "PO","DEV"), controller.create);
+router.put("/:id", Auth, TeamVerify.teamVerify("TL", "SM", "PO","DEV"), controller.update);
+router.delete("/:id", Auth, TeamVerify.teamVerify("TL", "SM","PO","DEV"), controller.remove);
 module.exports = router;

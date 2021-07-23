@@ -48,23 +48,23 @@ export const Teams = () => {
       <div className="row">
         <div className="col-md-8">
           <button
-            className="btn btn-toggle align-items-center rounded collapsed"
+            className=" white btn btn-toggle align-items-center rounded collapsed"
             data-bs-toggle="collapse"
             data-bs-target="#team-collapse"
             aria-expanded="true"
           >
-            Teams
+            <span className="white">Teams</span>
           </button>
         </div>
-        <div className="col-md-4">
-          <button
+        <div className="m5 col-md-4">
+          {localStorage.getItem('rolProject')==='PO'&&<button
             className="btn btn-primary"
             onClick={() => {
               handleCreate();
             }}
           >
             <i className="fas fa-plus-circle"></i>
-          </button>
+          </button>}
         </div>
       </div>
       <div className="collapse show" id="team-collapse">
@@ -76,18 +76,18 @@ export const Teams = () => {
                   <li className="link-ligth rounded">{team.name}</li>
                 </div>
                 <div className="col-md-4">
-                  <button
+                  {localStorage.getItem('rolProject')==='PO'&&<button
                     className="btn btn-warning btn-sm"
                     onClick={() => handleEdit(team)}
                   >
                     <i className="fas fa-pen"></i>
-                  </button>
-                  <button
+                  </button>}
+                  {localStorage.getItem('rolProject')==='PO'&&<button
                     className="btn btn-danger btn-sm"
                     onClick={() => handleDelete(team._id)}
                   >
                     <i className="fas fa-trash"></i>
-                  </button>
+                  </button>}
                 </div>
               </div>
             ))}
